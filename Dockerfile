@@ -1,1 +1,1 @@
-FROM abernix/meteord
+FROM jshimko/meteor-launchpad
