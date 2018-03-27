@@ -1,2 +1,5 @@
 job:
-  script: "now deploy --docker --env MONGO_URL=$MONGO_URL --token $NOW_TOKEN --domain nickstest.now.sh"
+  before_script:
+    - "npm install --global now"
+  script:
+    - "now deploy --docker --env MONGO_URL=$MONGO_URL --token $NOW_TOKEN --domain nickstest.now.sh"
