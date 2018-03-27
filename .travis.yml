@@ -1,6 +1,12 @@
+language: node_js
+node_js:
+  - '8'
+# branches:
+#   only:
+#     - master
 install:
-- npm install --global now
+  - npm install --global now
 script:
-- now rm bullet-journal -y
-- now deploy -p --docker -t $NOW_TOKEN -e MONGO_URL=$MONGO_URL
-- now alias bullet-journal.now.sh
+  - now rm bullet-journal -y
+  - now deploy --public --docker --token $NOW_TOKEN --env MONGO_URL=$MONGO_URL
+  - now alias bullet-journal.now.sh
