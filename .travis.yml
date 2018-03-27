@@ -1,12 +1,13 @@
 language: node_js
 node_js:
-  - '8'
-# branches:
-#   only:
-#     - master
+- '8'
 install:
-  - npm install --global now
+- npm install --global now
 script:
-  - now rm -t $NOW_TOKEN $NAME -y
-  - now deploy --docker -t $NOW_TOKEN -n $NAME -p  -e MONGO_URL=$MONGO_URL
-  - now alias -t $NOW_TOKEN $NAME.now.sh
+- now rm $NAME -y -t $NOW_TOKEN
+- now deploy --docker -n $NAME -p -e MONGO_URL=$MONGO_URL -t $NOW_TOKEN
+- now alias $NAME.now.sh -t $NOW_TOKEN
+env:
+  global:
+  - secure: oxGyYHAPWs9oQTKLiBIudrXIXmB6RMhIOqm4sFBKWnsK4c0ZZYSDSrM8qX6CyoG7pklLOr0oBehAppwKt5OUDigAi/BKHhoORNd9S21ScwuZdDsUjq4T6Deg0K7UEV14xIDuwuhDGYfX3lkrEziS0Byi/dnPNm8mD1VbZbRNwdEYZeJe1Eb/IuesP0Hbo3YgT6JSodlcmi1Hbl+kMu295Jc9/Q6FtTiVwoCiG4//abLV/BYcN9uBCQKRSnL8RFkm4FWr2Ee2DveGukmaV9lACWAdmaPBEljy7rtGEAiesNJBsAflb3PYJuA0n+HwrLyYsOuTeSik4EVKIdxnG49mXyktFQ0DGldhAjaP4lfACXfUGCiFBtj9gZMlI5vS87aCNeW+Pe9awbTx7N5u6hYuL5yMcc+MDZFoHkeL1Ejt95j2WZN4jOLgRqG1raa1KOCISJcYUS4aWHup1ARduCq2PNmmFs8r44RjhgR1mKFQcCtVMnCUoIIy1/Rq3bKVMe1XxoLz5OKGpAenr3jH9Hjp/UJEWlSc/lWEcELsZN4qg8gs8fCJ9KKxEnaWtUVsq+1BHkXVHOfZ2kbYjuPM9FM2lYFxcK+RRqEHWHoxx2FHLSise0TBnQh8TuMszn8Z/HyucMyplAAQ2Mc5v3Q8zwjSXR38W5FsjTeIdXqxIAAU7HQ=
+  - secure: aGHuOPYZYOaWiEtimk+l1PnuH5WFrvqdowL+N7E9FUlr2kFrRDXvdxyL7NgP6cujx2/2yCSnQ7xo6Bnu3+o6pdEKNDs1G0khSimangMEVgWLvJWjrIip432SxHaIAxqkKYTOQChcrlTtU3bQwODfdJEqdsT8wvGH9ETgMFDB/Y1WeT6Vnsq/19IhJdIFuFhNWuCMOimb1rT6jwoMMEHflKq+myqGl75Kej6Qn4+85rTXJ8DqyAy2zmSr2cu1afgWPCsIBmoTHWqF09m8p44MFAXqwJFkc620JsiM6X3B0xzAHQLYIIEZ5TX9Je4Y/km7PYqemEMMIb0pTZn/E4CNBpafxYoTYZjopu3sqA7MXrDUG91+MhYJaNNlp41NL1fA8VYFdShClmR3EJaz05efCn6B6xG/+EfeD/lSj9X/rU/N25/Qv67QjA+HmTO94CYjCZOv27sFIGC3Y+8aj3PkXO6McxJCjUJThwTdD6oCMKdSVktB1wn1yqb6Zx3fCRXVrw52BQer70iEEApF/jXkWT7W+sRp+jjNpBeLS2pDHVzVenRcVIY7qQjbhMH+N4mo9wOCaGM6NZZTXekFYbJllq+nROmbHTHZzIkHxEMV2D0p0b8sMZ1jFXOnP0DtK+rdrb2Sa8iiC8Q9xcaeZynzeB+pSOFo3QzJ/yHFl2AT/8w=
