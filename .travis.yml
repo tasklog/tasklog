@@ -4,9 +4,9 @@ node_js:
 install:
 - npm install --global now
 script:
-- now rm $NAME -y -t $NOW_TOKEN
-- now deploy --docker -n $NAME -p -e MONGO_URL=$MONGO_URL -t $NOW_TOKEN
-- now alias $NAME.now.sh -t $NOW_TOKEN
+- now rm $NAME -y --token=$NOW_TOKEN
+- now deploy --docker -n $NAME -p -e MONGO_URL=$MONGO_URL --token=$NOW_TOKEN
+- now alias --token=$NOW_TOKEN $NAME.now.sh
 env:
   global:
   - secure: oxGyYHAPWs9oQTKLiBIudrXIXmB6RMhIOqm4sFBKWnsK4c0ZZYSDSrM8qX6CyoG7pklLOr0oBehAppwKt5OUDigAi/BKHhoORNd9S21ScwuZdDsUjq4T6Deg0K7UEV14xIDuwuhDGYfX3lkrEziS0Byi/dnPNm8mD1VbZbRNwdEYZeJe1Eb/IuesP0Hbo3YgT6JSodlcmi1Hbl+kMu295Jc9/Q6FtTiVwoCiG4//abLV/BYcN9uBCQKRSnL8RFkm4FWr2Ee2DveGukmaV9lACWAdmaPBEljy7rtGEAiesNJBsAflb3PYJuA0n+HwrLyYsOuTeSik4EVKIdxnG49mXyktFQ0DGldhAjaP4lfACXfUGCiFBtj9gZMlI5vS87aCNeW+Pe9awbTx7N5u6hYuL5yMcc+MDZFoHkeL1Ejt95j2WZN4jOLgRqG1raa1KOCISJcYUS4aWHup1ARduCq2PNmmFs8r44RjhgR1mKFQcCtVMnCUoIIy1/Rq3bKVMe1XxoLz5OKGpAenr3jH9Hjp/UJEWlSc/lWEcELsZN4qg8gs8fCJ9KKxEnaWtUVsq+1BHkXVHOfZ2kbYjuPM9FM2lYFxcK+RRqEHWHoxx2FHLSise0TBnQh8TuMszn8Z/HyucMyplAAQ2Mc5v3Q8zwjSXR38W5FsjTeIdXqxIAAU7HQ=
