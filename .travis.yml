@@ -7,6 +7,6 @@ node_js:
 install:
   - npm install --global now
 script:
-  - now rm bullet-journal -y
-  - now deploy --public --docker --token $NOW_TOKEN --env MONGO_URL=$MONGO_URL
-  - now alias bullet-journal.now.sh
+  - now rm -t $NOW_TOKEN $NAME -y
+  - now deploy --docker -t $NOW_TOKEN -n $NAME -p  -e MONGO_URL=$MONGO_URL
+  - now alias -t $NOW_TOKEN $NAME.now.sh
