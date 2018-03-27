@@ -1,18 +1,6 @@
-jobs:
-  include:
-
-    - stage: production
-      if: branch = tmp-master
-      install:
-      - npm install now
-      script:
-      - npx now deploy -p --docker -t $NOW_TOKEN -e MONGO_URL=$MONGO_URL
-      - npx now alias bullet-journal.now.sh
-
-    - stage: development
-      if: branch = tmp-dev
-      install:
-      - npm install now
-      script:
-      - npx now deploy -p --docker -t $NOW_TOKEN -e MONGO_URL=$MONGO_URL
-      - npx now alias bullet-journal-dev.now.sh
+install:
+- npm install --global now
+script:
+- now rm bullet-journal -y
+- now deploy -p --docker -t $NOW_TOKEN -e MONGO_URL=$MONGO_URL
+- now alias bullet-journal.now.sh
