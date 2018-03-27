@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 
 const App = () => (
-  <div>Hello world</div>
+  <h1>Hello world</h1>
 );
 
 Meteor.startup(() => {
