@@ -1,8 +1,0 @@
-version: '2'
-services:
-  meteor:
-    build: .
-    ports:
-      - '5000:3000'
-    environment:
-      - MONGO_URL=mongodb://admin:1234567890@ds125489.mlab.com:25489/test123
