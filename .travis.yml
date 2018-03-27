@@ -12,4 +12,5 @@ install:
 - npm install --global now
 script:
 - now deploy --docker --public --env MONGO_URL=$MONGO_URL --token=$NOW_TOKEN
+- now --token=$NOW_TOKEN alias
 - now --token=$NOW_TOKEN remove our-bullet-journal --safe --yes
