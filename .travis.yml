@@ -2,7 +2,7 @@ jobs:
   include:
 
     - stage: production
-      if: branch = master
+      if: branch = tmp-master
       install:
       - npm install now
       script:
@@ -10,7 +10,7 @@ jobs:
       - npx now alias bullet-journal.now.sh
 
     - stage: development
-      if: branch = dev
+      if: branch = tmp-dev
       install:
       - npm install now
       script:
