@@ -13,6 +13,6 @@ env:
 install:
   - npm install --global now
 script:
-  - now remove --safe --yes --token=$NOW_TOKEN --team $NOW_TEAM
-  - now deploy --docker --public --env MONGO_URL=$MONGO_URL --token=$NOW_TOKEN --team $NOW_TEAM --name $NOW_NAME
+  - now remove $NOW_NAME --safe --yes --token=$NOW_TOKEN --team $NOW_TEAM
+  - now deploy --docker --public --name $NOW_NAME --env MONGO_URL=$MONGO_URL --token=$NOW_TOKEN --team $NOW_TEAM
   - now alias --token=$NOW_TOKEN --team $NOW_TEAM
