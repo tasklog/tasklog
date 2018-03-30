@@ -1,30 +1,22 @@
-import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { render } from 'react-dom';
-import { Tracker } from 'meteor/tracker'
+import React from 'react'
+import { Meteor } from 'meteor/meteor'
+import { render } from 'react-dom'
 
-Tracker.autorun(() => {
-  console.log(Meteor.user())
-})
-
-const login = () => {
-  Meteor.loginWithGoogle({
-    requestPermissions: [
-      'https://www.googleapis.com/auth/calendar.readonly'
-    ]
-  }, (err) => {
-    if (err) {
-      // handle error
-    } else {
-      // successful login!
-    }
-  });
-}
+import Auth from './components/Auth'
+import Login from './components/Login'
+import Logout from './components/Logout'
 
 const App = () => (
-  <button onClick={login}>Hello world</button>
-);
+  <Auth login={Login}>
+    {() => (
+      <>
+        <Logout />
+        <h3>hello {Meteor.user().services.google.email}</h3>
+      </>
+    )}
+  </Auth>
+)
 
 Meteor.startup(() => {
-  render(<App />, document.getElementById('render-target'));
-});
+  render(<App />, document.getElementById('render'));
+})
