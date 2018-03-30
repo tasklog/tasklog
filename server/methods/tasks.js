@@ -14,18 +14,22 @@ Meteor.methods({
     })
   },
   'task.setStatus'(_id, status) {
-    Tasks.update({ _id }, { $set: { status } })
+    Tasks.update({ _id }, { $set: {  } })
   },
   'task.complete'(_id) {
-    Meteor.call('task.setStatus', _id, 'COMPLETE')
     Tasks.update({ _id }, {
-      $set: { completed: new Date() }
+      $set: {
+        completed: new Date(),
+        status: 'COMPLETE'
+      }
     })
   },
   'task.incomplete'(_id) {
-    Meteor.call('task.setStatus', _id, 'DEFAULT')
     Tasks.update({ _id }, {
-      $set: { completed: null }
+      $set: {
+        completed: null,
+        status: 'DEFAULT'
+      }
     })
   },
   'task.reschedule'(_id, newScheduled) {
