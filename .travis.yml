@@ -3,7 +3,7 @@ node_js:
   - '8'
 branches:
   only:
-    - feature-improve-ci
+    - dev
 env:
   global:
     - secure: wILZm5K4phsUAe0zmqHP3wMIVCq15HpyUcasPXsDdkZ2k2cyKj6JfjOuLELHA5CRHaYO1mBwUPCV7GOn0w9QAsmnhWNTaqFea0eA2d48vPYs5OYLJhE1zVKf0YXljWs0Wo/uFUVqp+NGmcP3izjQbYiantCWOO+ND+c9SDoFHBQnHGtw4GB1lfucmLMKT3u8bc2cgFpHahIsntns3w1wMgrRmPSZdIpUaPZn4uI35iSP4uVayTx9uli1BgvZqPmO007qCFgogyEOsLIE8ktjEj6NPT/05OHJhHw5X5u6aDP3YKByaQScQHJ4TCbdxMv6p8IFBXMS/3uYLF11/1gOQE2J9QPjBD+moD6vgam/OtPnoAetLFQzzcK2Aw5+L36DiYOYnwnG/mFWqCECxZzOy56+7Xvf4H8ontd38wL2WfujKoC9894AdxNl1AxFKGI5JkPB272glMtrlUlQHh7RJdpIRMVkaQAz4Tl5hoQN9l1jRiVBfDmPS86RMiKGKsQe9nq0VoACs1lg+O57Iza/zbvqZCq/zzdI/rEz+R0YEdzgqgpKlspvRdt4p7w7g8ZUKBp6k9wWnHIkrU+WgCg8SO+wVG1cbU+5LdsgC+Tmjk1oUb+GiTvw12fsc3NE77mKelZ+CnYg5EHwso9RaEQT9GAVcXTKnTsoNRN9ybBHcxQ=
