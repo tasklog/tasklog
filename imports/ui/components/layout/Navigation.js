@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { logout } from '../../../utils/auth'
+import { logout } from '/imports/utils/auth'
 
 class Navigation extends Component {
     render() {

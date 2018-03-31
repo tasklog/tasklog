@@ -1,6 +1,6 @@
 import React from 'react'
 import GoogleButton from 'react-google-button'
-import { loginWithGoogle } from '../../../utils/auth'
+import { loginWithGoogle } from '/imports/utils/auth'
 
 const Login = () => (
     <GoogleButton onClick={loginWithGoogle} />
