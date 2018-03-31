@@ -14,32 +14,34 @@ Meteor.methods({
         })
     },
     'task.setStatus'(_id, status) {
-        Tasks.update({ _id }, { $set: {  } })
+        Tasks.update({ _id }, {
+            $set: { status }
+        })
     },
     'task.complete'(_id) {
         Tasks.update({ _id }, {
             $set: {
-            completed: new Date(),
-            status: 'COMPLETE'
+                completed: new Date(),
+                status: 'COMPLETE'
             }
         })
     },
     'task.incomplete'(_id) {
         Tasks.update({ _id }, {
             $set: {
-            completed: null,
-            status: 'DEFAULT'
+                completed: null,
+                status: 'DEFAULT'
             }
         })
     },
-    'task.reschedule'(_id, newScheduled) {
+    'task.reschedule'(_id, scheduled) {
         Tasks.update({ _id }, {
-            $set: { scheduled: newScheduled }
+            $set: { scheduled }
         })
     },
-    'task.changeDue'(_id, newDue) {
+    'task.changeDue'(_id, due) {
         Tasks.update({ _id }, {
-            $set: { due: newDue }
+            $set: { due }
         })
     }
 })
