@@ -14,21 +14,21 @@ Meteor.methods({
         })
     },
     'task.setStatus'(_id, status) {
-        Tasks.update({ _id }, { $set: {} })
+        Tasks.update({ _id }, { $set: {  } })
     },
     'task.complete'(_id) {
         Tasks.update({ _id }, {
             $set: {
-                completed: new Date(),
-                status: 'COMPLETE'
+            completed: new Date(),
+            status: 'COMPLETE'
             }
         })
     },
     'task.incomplete'(_id) {
         Tasks.update({ _id }, {
             $set: {
-                completed: null,
-                status: 'DEFAULT'
+            completed: null,
+            status: 'DEFAULT'
             }
         })
     },
