@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
-import { Tasks } from '../../collections/tasks'
+import { Tasks } from '/imports/collections/tasks'
 
 Meteor.methods({
   'task.create'(text, scheduled = null, due = null) {
