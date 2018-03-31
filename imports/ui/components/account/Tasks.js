@@ -27,7 +27,6 @@ class Tasks extends Component {
         this.tracker.stop()
     }
     render() {
-        console.log(this.state.tasks)
         return this.props.children(this.state.tasks)
     }
 }

@@ -7,6 +7,9 @@ class TaskList extends Component {
         Meteor.call('task.create', event.target.text.value)
         event.target.reset()
     }
+    click = (id) => {
+        Meteor.call('task.delete', id)
+    }
     render() {
         return (
             <form onSubmit={this.submit}>
@@ -15,7 +18,7 @@ class TaskList extends Component {
                 <ul>
                     <Tasks>
                         {tasks => tasks.map(task => (
-                            <li key={task._id}>
+                            <li key={task._id} onClick={() => this.click(task._id)}>
                                 {task.text}
                             </li>
                         ))}
