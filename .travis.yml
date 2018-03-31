@@ -10,9 +10,10 @@ env:
     - secure: PLDJhQbCwiOMMy7jdbo1ZZIhFSIia3OeIm8H8PewRz3W5T41MwaI0Frx3WlYLHyN3Ur0SHmwo7IVfZ7fpGSDcvq07M/jJYetQ7+GNJrvqRonqg6fUw7CnozK5j4bIY45ZpM6jHxyzmQ8Sd7DWBsSfFwk/FDeUF2Hs1ol6Kuz3nc1eNNsbyftun1t25lHHHwIyw7zbrKsV1/P2CsC1pggjA7DdTJgkULvYkBqL8lkp2zfvojz2L8cpx2BConSnW0fb5ZgAxGt4WiV7+sGvR3EmczM3CGEOg0RUBBs7A1ztOd23fNB0lpXieBEi8XzaEVxuP8g8Br4BaboF90ky5BE7i/47eWVkVsNlXj9qdlhJzrTUYLU4Q0+OcNgKHX81rxoyElyD90zIpvG49Qe9v67quc5IKyYc/f4huQdrtAFubJk0AgaRbckX1B8oVDW2T5gJTPsUM3ZmLm40dRMLMxgImYQnAhByOnREMjmYSuSn3/uosJjPijO6kWxRXXLLkn/tSiCiRm500R1zBfmhimps0KfMig/Dss0KWdwfbRH/SKjAIEm+X5seZjhH2XmGl6qhp4cSNl/K9ZJCbIi69juuMdZXNcMVW6CgJ2vRABu9GPPF/7mwanCw/wMQ1Jl4NkL2Gni9s3Yi3OCnVkdFL5lukMtfnd4Eds0/6zuOzd3ATA=
     - NOW_TEAM=itis-4440
     - NOW_NAME=our-bullet-journal
+    - ROOT_URL=https://our-bullet-journal.now.sh
 install:
   - npm install --global now
 script:
   - now remove $NOW_NAME --safe --yes --token=$NOW_TOKEN --team $NOW_TEAM
-  - now deploy --docker --public --name $NOW_NAME --env MONGO_URL=$MONGO_URL --token=$NOW_TOKEN --team $NOW_TEAM
+  - now deploy --docker --public --name $NOW_NAME --env MONGO_URL=$MONGO_URL --env ROOT_URL=$ROOT_URL --token=$NOW_TOKEN --team $NOW_TEAM
   - now alias --token=$NOW_TOKEN --team $NOW_TEAM
