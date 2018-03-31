@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-import Auth from '../components/account/Auth'
-import Login from '../components/account/Login'
+import Auth from '/imports/ui/components/account/Auth'
+import Login from '/imports/ui/components/account/Login'
 
-import Container from '../components/layout/Container'
-import Navigation from '../components/layout/Navigation'
-import Page from './Page'
+import Container from '/imports/ui/components/layout/Container'
+import Navigation from '/imports/ui/components/layout/Navigation'
+import Page from '/imports/ui/containers/Page'
 
 class App extends Component {
     render() {
