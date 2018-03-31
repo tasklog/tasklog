@@ -51,22 +51,33 @@ body {
 
 .navigation,
 .page {
-    display: inline-block;
+    float: left;
     vertical-align: top;
+    height: 100%;
 }
 
 .navigation {
     width: calc(100% - @page-width);
-    padding: 2.5% 0 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 
     ul {
         list-style: none;
 
         li {
-            margin-bottom: 10%;
+            &:not(:last-child) {
+                margin-bottom: 10%;
+            }
 
-            &.brand {
-                margin-bottom: 15%
+            &.profile {
+                margin-bottom: 15%;
+
+                img {
+                    width: 35%;
+                    height: 35%;
+                    border-radius: 50%;
+                }
             }
         }
     }
@@ -84,7 +95,6 @@ body {
 
     background: @white;
     width: @page-width;
-    height: 100%;
     padding: 2.5% 5%;
 
     @media only screen 
