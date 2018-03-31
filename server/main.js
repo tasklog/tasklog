@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 
 Meteor.startup(() => {
   // ServiceConfiguration.configurations.insert({
@@ -7,4 +7,4 @@ Meteor.startup(() => {
   //   loginStyle: 'popup',
   //   secret: 'SDrISTVcyKLDQiZmHzyRae4C'
   // })
-});
+})
