@@ -13,6 +13,9 @@ Meteor.methods({
             completed: null
         })
     },
+    'task.delete'(_id) {
+        Tasks.remove({ _id })
+    },
     'task.setStatus'(_id, status) {
         Tasks.update({ _id }, {
             $set: { status }
