@@ -10,13 +10,21 @@ class Navigation extends Component {
                     <li className='profile'>
                         <img src={Meteor.user().services.google.picture} alt='profile image' />
                     </li>
-                    <li>This Year</li>
-                    <li>This Month</li>
-                    <li>Today</li>
+                    <li>
+                        <a href='#'>This Year</a>
+                    </li>
+                    <li>
+                        <a href='#'>This Month</a>
+                    </li>
+                    <li>
+                        <a href='#'>Today</a>
+                    </li>
                 </ul>
 
                 <ul>
-                    <li onClick={logout}>Logout</li>
+                    <li>
+                        <a href='#' onClick={logout}>Logout</a>
+                    </li>
                 </ul>
             </nav>
         )
