@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import '/imports/api/tasks/methods'
 
 Meteor.startup(() => {
     // ServiceConfiguration.configurations.insert({
