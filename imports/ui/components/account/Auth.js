@@ -1,15 +1,21 @@
 import { withTracker } from 'meteor/react-meteor-data'
 import has from 'lodash.has'
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 const Auth = (props) => {
-    if (props.isLoggingIn) {
-        return null
-    }
     if (!props.isLoggedIn) {
         return React.createElement(props.login)
     }
+    if (props.isLoggingIn) {
+        return props.loading ? React.createElement(props.loading) : null
+    }
     return props.children()
+}
+
+Auth.propTypes = {
+    login: PropTypes.func.isRequired,
+    loading: PropTypes.func
 }
 
 export default withTracker(() => {
