@@ -1,28 +1,21 @@
+import { withTracker } from 'meteor/react-meteor-data'
 import React, { Component } from 'react'
-import { Tracker } from 'meteor/tracker'
 
-class Auth extends Component {
-    state = {
-        loggedIn: false,
-        loggingIn: false
+const Auth = (props) => {
+    if (props.isLoggedIn) {
+        return props.children()
     }
-    componentDidMount() {
-        Tracker.autorun(() => {
-            this.setState({
-                loggedIn: !!Meteor.user(),
-                loggingIn: Meteor.loggingIn()
-            })
-        })
+    if (props.isLoggingIn) {
+        return null
     }
-    render() {
-        if (this.state.loggingIn) {
-            return null
-        }
-        if (this.state.loggedIn) {
-            return this.props.children()
-        }
-        return <this.props.login />
+    if (!props.isLoggingIn && !props.isLoggedIn) {
+        return <props.login />
     }
 }
 
-export default Auth
+export default withTracker(() => {
+    return {
+        isLoggedIn: !!Meteor.user(),
+        isLoggingIn: Meteor.loggingIn()
+    }
+})(Auth)
