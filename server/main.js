@@ -1,5 +1,8 @@
 import { Meteor } from 'meteor/meteor'
+
 import '/imports/api/tasks/methods'
+import '/imports/api/tasks/server/publications'
+import '/imports/api/users/server/publications'
 
 Meteor.startup(() => {
     if (!ServiceConfiguration.configurations.findOne({ service: 'google' })) {

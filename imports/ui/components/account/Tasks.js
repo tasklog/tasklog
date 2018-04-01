@@ -14,6 +14,8 @@ Tasks.propTypes = {
 }
 
 export default withTracker(props => {
+    Meteor.subscribe('tasks')
+
     const query = {}
 
     Array('day', 'month', 'year').forEach(interval => {

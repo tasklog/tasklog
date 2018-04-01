@@ -1,21 +1,23 @@
 import { withTracker } from 'meteor/react-meteor-data'
+import has from 'lodash.has'
 import React, { Component } from 'react'
 
 const Auth = (props) => {
-    if (props.isLoggedIn) {
-        return props.children()
-    }
     if (props.isLoggingIn) {
         return null
     }
-    if (!props.isLoggingIn && !props.isLoggedIn) {
-        return <props.login />
+    if (!props.isLoggedIn) {
+        return React.createElement(props.login)
     }
+    return props.children()
 }
 
 export default withTracker(() => {
+    Meteor.subscribe('userData')
+    const user = Meteor.user()
+    const isLoggedIn = has(user, 'services.google.accessToken')
     return {
-        isLoggedIn: !!Meteor.user(),
-        isLoggingIn: Meteor.loggingIn()
+        isLoggedIn,
+        isLoggingIn: Meteor.loggingIn() || (user && !isLoggedIn)
     }
 })(Auth)
