@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { resolve } from 'path'
 import dotenv from 'dotenv'
 
 import '/imports/api/tasks/methods'
@@ -7,7 +8,7 @@ import '/imports/api/users/server/publications'
 
 Meteor.startup(() => {
     // read .env file for environment variables
-    dotenv.config()
+    dotenv.config({ path: resolve(Meteor.absolutePath, '.env') })
     // configure google if needed
     if (!ServiceConfiguration.configurations.findOne({ service: 'google' })) {
         ServiceConfiguration.configurations.insert({
