@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import '/imports/api/tasks/methods'
 import '/imports/api/tasks/server/publications'
 import '/imports/api/users/server/publications'
+import '/imports/api/seeds/methods'
 
 Meteor.startup(() => {
     // read .env file for environment variables
