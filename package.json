@@ -1,5 +1,5 @@
 {
-  "name": "bullet-journal",
+  "name": "tasklog",
   "private": true,
   "scripts": {
     "start": "meteor run"
