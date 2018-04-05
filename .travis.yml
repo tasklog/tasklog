@@ -8,13 +8,14 @@ env:
   global:
   - secure: wILZm5K4phsUAe0zmqHP3wMIVCq15HpyUcasPXsDdkZ2k2cyKj6JfjOuLELHA5CRHaYO1mBwUPCV7GOn0w9QAsmnhWNTaqFea0eA2d48vPYs5OYLJhE1zVKf0YXljWs0Wo/uFUVqp+NGmcP3izjQbYiantCWOO+ND+c9SDoFHBQnHGtw4GB1lfucmLMKT3u8bc2cgFpHahIsntns3w1wMgrRmPSZdIpUaPZn4uI35iSP4uVayTx9uli1BgvZqPmO007qCFgogyEOsLIE8ktjEj6NPT/05OHJhHw5X5u6aDP3YKByaQScQHJ4TCbdxMv6p8IFBXMS/3uYLF11/1gOQE2J9QPjBD+moD6vgam/OtPnoAetLFQzzcK2Aw5+L36DiYOYnwnG/mFWqCECxZzOy56+7Xvf4H8ontd38wL2WfujKoC9894AdxNl1AxFKGI5JkPB272glMtrlUlQHh7RJdpIRMVkaQAz4Tl5hoQN9l1jRiVBfDmPS86RMiKGKsQe9nq0VoACs1lg+O57Iza/zbvqZCq/zzdI/rEz+R0YEdzgqgpKlspvRdt4p7w7g8ZUKBp6k9wWnHIkrU+WgCg8SO+wVG1cbU+5LdsgC+Tmjk1oUb+GiTvw12fsc3NE77mKelZ+CnYg5EHwso9RaEQT9GAVcXTKnTsoNRN9ybBHcxQ=
   - secure: LClAuNuU05IzmrQ+qrn/OhHRJGdF+tczxC8UrTtgnadvJtUDcyyjzybw0F8yYoswpnqcfuPInTZJqMOQVIi5J60c11UTNuoR1fxPwRg/h78Wgu6EFAzompewpHRpC9TnPk3McMeD/znAUc2A7PPuK8Rj+h9p639x7MkAjUWNvbP2JJyVgD/8Y5oB/VCeuzBCqR+VJ0PkpBMLMKVlb0GMmws49phAqZCf6hIpp9RC1a9PTC9pF5SAM3Iip4RxreV1sQXbtf/N2T8suMjxMXeS/tmUeInQfkmS7Y4jaHWyPQXg6uwv9I7PZgaVGa+coWgDjf7LhhURwIE3OI6h2MVwiz528nFig1Zx33+jhAxEsxLyLH76i5SLPMaHBiJc+6MLkYHzuoKYRSSoKbTSGO95RIM3uQUt9jL4MMKPDoEZStdz1QvN/R2TQbml248Kvxr9vbEkgnexbTtWPPLN/3NtxWA6nv16QQx3lC5YGDb4Nly+irqdIOjzSoU/dLwIDfaJWgfpb/D+cwQYjs4QOESlfaMwXXATEDR9Bb2QSXCAZHdE3EItQGq42eg0YkwRC2yw5exPqm2JjAliJTZKheJh8IZVYPfI/+ngniJr0tyQ7hmUTm2/Af4psRyYMqF/U3+Jjvr+/rELt9Ewo7waDHmeGV5qIMmft9Isc1FKd7IP0iY=
+  - secure: jMQYfuFPSnLtZNXMQpJkXJOJbYYpZasVXGFy8jBqQ5PzikVklUbpUpXQpYZHDlhem0hJ0zxwI8q8caq2MartiSZ9EqNwAsDTSHA00vTgpQ+9c0uZouk2zu/MiUP+UwZlG5nHCyr9uk+jGg5aAtNzSfmpOpRzQBlfsgVWAtRs8y8D1dyyZX6dn5SuDXsNvCBw3xXTh897acGbNJp/p8CBMV8VxShG45RdJAb++UNDrr4DdbT9PIgnjZ+04O//1p9bnEiNHMpkBKGTHhNgIs6n0SdNQSkhpMEr+I+oT2YZeakT2thsF6PkxdEKSFERp2QY50o6oD0qI1uKPjCYXTaRMjp+Ajp2c8S3vx3ZOW+X5kKCw9H1o5iVg/9G4PmSx9FJ1z+PJfiXZ/9Q5KMAVWwskSM/FGJGYQhuZag1ibHvENqU8NGCmAQhY1XKhEAsAIlFcFxPFMswi6I7aVxGMb+y+5cFw4ESG6pe7Ewi1cPezrqL8XbcYWajaO+Duf3Ss53Ko5+Z2/hqQIJnh1fuGYaL/yhXpCdn0SkUcJF3DAn/0SRxn9tA/WgHKnBy5RhpyBPiuAfu30KS8m0T8IK6YG0qKWno3iwQjTcBJkAKWnAPXYiJOrRMiEr2bO3DlQ6+uDfJ/ygYBIclAEG7v7ZYshhUz2lmluQXrOGU3p8zmnrutlw=
   - NOW_TEAM=tasklog
   - NOW_NAME=tasklog
   - ROOT_URL=https://tasklog.now.sh
 install:
 - npm install --global now
 script:
-- now remove $NOW_NAME --safe --yes --token=$NOW_TOKEN --team $NOW_TEAM || true
-- now deploy --docker --public --name $NOW_NAME --env MONGO_URL=$MONGO_URL --env ROOT_URL=$ROOT_URL
-  --token=$NOW_TOKEN --team $NOW_TEAM
-- now alias --token=$NOW_TOKEN --team $NOW_TEAM
+- now remove $NOW_NAME --safe --yes --token $NOW_TOKEN --team $NOW_TEAM || true
+- now deploy --docker --public --name $NOW_NAME --token $NOW_TOKEN --team $NOW_TEAM
+  --env MONGO_URL=$MONGO_URL --env ROOT_URL=$ROOT_URL --env GOOGLE_SECRET=$GOOGLE_SECRET
+- now alias --token $NOW_TOKEN --team $NOW_TEAM

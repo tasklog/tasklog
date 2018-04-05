@@ -1,3 +1,4 @@
-/.git
-/.meteor/local
-/node_modules
+.env
+.git
+.meteor/local
+node_modules
