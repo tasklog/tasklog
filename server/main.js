@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { resolve } from 'path'
+import { Picker } from 'meteor/meteorhacks:picker'
 import dotenv from 'dotenv'
 
 import '/imports/api/tasks/methods'
@@ -18,4 +19,8 @@ Meteor.startup(() => {
             secret: process.env.GOOGLE_SECRET
         })
     }
+    Picker.route('/hello', function(params, req, res, next) {
+        
+        res.end('hello world');
+      });
 })

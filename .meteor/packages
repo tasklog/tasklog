@@ -23,4 +23,5 @@ service-configuration
 less
 aldeed:collection2
 react-meteor-data
+meteorhacks:picker
 ostrio:meteor-root
