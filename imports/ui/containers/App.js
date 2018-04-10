@@ -23,10 +23,10 @@ class App extends Component {
                             <Navigation />
                             <Page>
                                 <Switch>
-                                    <Route path='/d/:year/:month/:day' component={DailyLog} />
-                                    <Route path='/w/:year/:week' component={WeeklyLog} />
-                                    <Route path='/m/:year/:month' component={MonthlyLog} />
-                                    <Route path='/y/:year' component={YearlyLog} />
+                                    <Route exact path='/d/:year/:month/:day' component={DailyLog} />
+                                    <Route exact path='/w/:year/:week' component={WeeklyLog} />
+                                    <Route exact path='/m/:year/:month' component={MonthlyLog} />
+                                    <Route exact path='/y/:year' component={YearlyLog} />
                                 </Switch>
                             </Page>
                         </Container>

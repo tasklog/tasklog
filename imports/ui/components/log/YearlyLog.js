@@ -10,7 +10,7 @@ class YearlyLog extends Component {
             <div>
                 <Title>2018</Title>
                 <ul className='daily-log'>
-                    <Tasks>
+                    <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
                             <li key={task._id} className='task'>
                                 {task.text}

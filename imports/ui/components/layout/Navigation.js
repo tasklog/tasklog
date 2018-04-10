@@ -30,7 +30,7 @@ class Navigation extends Component {
                         </Link>
                     </li>
                     <li>
-                        <Link to={`/w/${year}/${month}/${day}`}>
+                        <Link to={`/d/${year}/${month}/${day}`}>
                             Today
                         </Link>
                     </li>

@@ -6,9 +6,9 @@ Meteor.methods({
         Tasks.remove({
             userId: Meteor.userId()
         })
-        Meteor.call('task.create', 'Buy milk')
-        Meteor.call('task.create', 'Get gas')
-        Meteor.call('task.create', 'Do work')
-        Meteor.call('task.create', 'Rest')
+        Meteor.call('task.create', 'day', { year: 2018, month: 4, day: 10 })
+        Meteor.call('task.create', 'week', { year: 2018, month: 4, day: 12 })
+        Meteor.call('task.create', 'month', { year: 2018, month: 4 })
+        Meteor.call('task.create', 'year', { year: 2018 })
     }
 })
