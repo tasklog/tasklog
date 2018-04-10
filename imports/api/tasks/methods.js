@@ -2,16 +2,20 @@ import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
 import { Tasks } from './tasks'
 
+export const create = ({ userId, text, scheduled=null, due=null }) => {
+    Tasks.insert({
+        userId,
+        text,
+        scheduled,
+        due,
+        status: 'DEFAULT',
+        completed: null
+    })
+}
+
 Meteor.methods({
-    'task.create'(text, scheduled = null, due = null) {
-        Tasks.insert({
-            userId: Meteor.userId(),
-            text,
-            scheduled,
-            due,
-            status: 'DEFAULT',
-            completed: null
-        })
+    'task.create'(text, scheduled, due) {
+        create({ userId: Meteor.userId(), text, scheduled, due })
     },
     'task.delete'(_id) {
         Tasks.remove({ _id })
