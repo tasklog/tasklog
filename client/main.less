@@ -41,12 +41,14 @@ a {
     font-weight: bold;
 }
 
-// styles
+// global styles
 
 body {
     font-family: 'CircularStd', 'Open Sans', sans-serif;
     background: @light;
 }
+
+// layout styles
 
 .container {
     margin: 2.5% auto;
@@ -106,5 +108,19 @@ body {
     and (max-device-width: 1024px) 
     and (-webkit-min-device-pixel-ratio: 1) {
         width: 100%;
+    }
+}
+
+// other styles
+
+.title {
+    margin-bottom: 20px;
+}
+
+.daily-log {
+    list-style: none;
+    
+    .task {
+        margin-bottom: 20px;
     }
 }
