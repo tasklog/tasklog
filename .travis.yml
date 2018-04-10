@@ -17,5 +17,5 @@ install:
 script:
 - now remove $NOW_NAME --safe --yes --token $NOW_TOKEN --team $NOW_TEAM || true
 - now deploy --docker --public --name $NOW_NAME --token $NOW_TOKEN --team $NOW_TEAM
-  --env MONGO_URL=$MONGO_URL --env ROOT_URL=$ROOT_URL --env GOOGLE_SECRET=$GOOGLE_SECRET || cat
+  --env MONGO_URL=$MONGO_URL --env ROOT_URL=$ROOT_URL --env GOOGLE_SECRET=$GOOGLE_SECRET || cut -c1-250
 - now alias --token $NOW_TOKEN --team $NOW_TEAM
