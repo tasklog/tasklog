@@ -4,12 +4,15 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 const Auth = (props) => {
-    if (!props.isLoggedIn) {
-        return React.createElement(props.login)
-    }
     if (props.isLoggingIn) {
+        // render loading indicator if available
         return props.loading ? React.createElement(props.loading) : null
     }
+    if (!props.isLoggedIn) {
+        // render login component if not logged in
+        return React.createElement(props.login)
+    }
+    // pass through to children if logged in
     return props.children()
 }
 
