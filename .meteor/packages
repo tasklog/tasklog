@@ -25,3 +25,4 @@ aldeed:collection2
 react-meteor-data
 ostrio:meteor-root
 webapp
+dispatch:run-as-user

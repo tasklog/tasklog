@@ -3,9 +3,7 @@ import { Tasks } from '../tasks/tasks'
 
 Meteor.methods({
     'seeds.all'(){
-        Tasks.remove({
-            userId: Meteor.userId()
-        })
+        Tasks.remove({ userId: Meteor.userId() })
         Meteor.call('task.create', 'today', { year: 2018, month: 4, week: 15, day: 12 })
         Meteor.call('task.create', 'tomorrow', { year: 2018, month: 4, week: 15, day: 13 })
         Meteor.call('task.create', 'this week', { year: 2018, month: 4, week: 15 })

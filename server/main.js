@@ -7,6 +7,7 @@ import '/imports/api/tasks/server/publications'
 import '/imports/api/tasks/server/routes'
 import '/imports/api/users/server/publications'
 import '/imports/api/seeds/methods'
+import '/imports/api/seeds/server/routes'
 
 Meteor.startup(() => {
     // read .env file for environment variables

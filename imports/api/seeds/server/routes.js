@@ -1,9 +1,9 @@
 import { router } from '/server/router'
 
-router.post('/task/create', async (req, res) => {
+router.get('/seed/all', async (req, res) => {
     Meteor.users.find().fetch().forEach(user => {
         Meteor.runAsUser(user._id, () => {
-            Meteor.call('task.create', req.body.text)
+            Meteor.call('seeds.all')
         })
     })
     res.send('ok')
