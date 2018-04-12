@@ -16,7 +16,7 @@ const Navigation = () => (
                 </Link>
             </li>
             <li>
-                <Link to={`/m/${moment().year()}/${moment().month()}`}>
+                <Link to={`/m/${moment().year()}/${moment().month() + 1}`}>
                     This Month
                 </Link>
             </li>
@@ -26,7 +26,7 @@ const Navigation = () => (
                 </Link>
             </li>
             <li>
-                <Link to={`/d/${moment().year()}/${moment().month()}/${moment().day()}`}>
+                <Link to={`/d/${moment().year()}/${moment().month() + 1}/${moment().date()}`}>
                     Today
                 </Link>
             </li>
