@@ -3,7 +3,7 @@ import SimpleSchema from 'simpl-schema'
 export const Tasks = new Mongo.Collection('tasks')
 
 const DateSchema = new SimpleSchema({
-    day: {
+    date: {
         type: SimpleSchema.Integer,
         min: 1,
         max: 31,

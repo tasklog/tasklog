@@ -1,49 +1,43 @@
-import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
 
 import { logout } from '/imports/utils/auth'
-import { getDates } from '/imports/utils/date'
+import moment from 'moment'
 
-class Navigation extends Component {
-    render() {
-        const { day, week, month, year } = getDates()
+const Navigation = () => (
+    <nav className='navigation'>
+        <ul>
+            <li className='profile'>
+                <img src={Meteor.user().services.google.picture} alt='profile image' />
+            </li>
+            <li>
+                <Link to={`/y/${moment().year()}`}>
+                    This Year
+                </Link>
+            </li>
+            <li>
+                <Link to={`/m/${moment().year()}/${moment().month()}`}>
+                    This Month
+                </Link>
+            </li>
+            <li>
+                <Link to={`/w/${moment().year()}/${moment().week()}`}>
+                    This Week
+                </Link>
+            </li>
+            <li>
+                <Link to={`/d/${moment().year()}/${moment().month()}/${moment().day()}`}>
+                    Today
+                </Link>
+            </li>
+        </ul>
 
-        return (
-            <nav className='navigation'>
-                <ul>
-                    <li className='profile'>
-                        <img src={Meteor.user().services.google.picture} alt='profile image' />
-                    </li>
-                    <li>
-                        <Link to={`/y/${year}`}>
-                            This Year
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`/m/${year}/${month}`}>
-                            This Month
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`/w/${year}/${week}`}>
-                            This Week
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`/d/${year}/${month}/${day}`}>
-                            Today
-                        </Link>
-                    </li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <a href='#' onClick={logout}>Logout</a>
-                    </li>
-                </ul>
-            </nav>
-        )
-    }
-}
+        <ul>
+            <li>
+                <a href='#' onClick={logout}>Logout</a>
+            </li>
+        </ul>
+    </nav>
+)
 
 export default Navigation
