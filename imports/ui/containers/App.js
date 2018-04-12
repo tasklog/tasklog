@@ -8,6 +8,8 @@ import Container from '/imports/ui/components/layout/Container'
 import Navigation from '/imports/ui/components/layout/Navigation'
 import Page from '/imports/ui/containers/Page'
 
+import NotFound from '/imports/ui/components/page/NotFound'
+
 import DailyLog from '/imports/ui/components/log/DailyLog'
 import WeeklyLog from '/imports/ui/components/log/WeeklyLog'
 import MonthlyLog from '/imports/ui/components/log/MonthlyLog'
@@ -27,6 +29,7 @@ class App extends Component {
                                     <Route exact path='/w/:year/:week' component={WeeklyLog} />
                                     <Route exact path='/m/:year/:month' component={MonthlyLog} />
                                     <Route exact path='/y/:year' component={YearlyLog} />
+                                    <Route component={NotFound} />
                                 </Switch>
                             </Page>
                         </Container>
