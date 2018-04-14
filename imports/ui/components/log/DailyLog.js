@@ -5,8 +5,26 @@ import Title from '/imports/ui/components/page/Title'
 import Task from '/imports/ui/components/page/Task'
 
 import Tasks from '/imports/ui/components/account/Tasks'
+import { importGoogleCalendar } from '/imports/utils/gcal'
+import moment from 'moment'
 
 class DailyLog extends Component {
+    state = {
+        isCalendarLoaded: false,
+        calendarEvents: []
+    }
+
+    async componentDidMount() {
+        const cal = await importGoogleCalendar()
+        const res = await cal.events.list({ calendarId: 'primary' })
+        const { year, month, day } = this.props.match.params
+        this.setState({
+            calendarEvents: res.result.items.filter(event => {
+                return moment(new Date(year, month - 1, day)).isSame(event.start.dateTime, 'day')
+            })
+        })
+    }
+
     onComplete = (id) => {
         Meteor.call('task.toggle', id)
     }
@@ -15,6 +33,9 @@ class DailyLog extends Component {
         return (
             <div>
                 <Title>March 31, 2018</Title>
+                {this.state.calendarEvents.map(event => (
+                    <p key={event.id}>{event.summary}</p>
+                ))}
                 <ul className='daily-log'>
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
