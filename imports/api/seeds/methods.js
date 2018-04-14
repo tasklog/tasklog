@@ -1,8 +1,27 @@
 import { Meteor } from 'meteor/meteor'
 import { Tasks } from '../tasks/tasks'
+import { resolve } from 'path'
+import dotenv from 'dotenv'
+
+import '/imports/api/tasks/methods'
+import '/imports/api/tasks/server/publications'
+import '/imports/api/tasks/server/routes'
+import '/imports/api/users/server/publications'
+import '/imports/api/seeds/methods'
+import '/imports/api/seeds/server/routes'
 
 Meteor.methods({
-    'seeds.all'(){
+    'seed.credentials'() {
+        ServiceConfiguration.configurations.remove({})
+        // configure google if needed
+        ServiceConfiguration.configurations.insert({
+            service: 'google',
+            clientId: '852673380073-qku8k0ed0dh407ini7tcq52hnq4mdq1o.apps.googleusercontent.com',
+            loginStyle: 'popup',
+            secret: process.env.GOOGLE_SECRET
+        })
+    },
+    'seed.user'() {
         Tasks.remove({ userId: Meteor.userId() })
         Meteor.call('task.create', 'today', { year: 2018, month: 4, week: 15, day: 12 })
         Meteor.call('task.create', 'tomorrow', { year: 2018, month: 4, week: 15, day: 13 })
