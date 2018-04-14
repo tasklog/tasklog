@@ -16,7 +16,6 @@ class DailyLog extends Component {
             <div>
                 <Title>March 31, 2018</Title>
                 <ul className='log'>
-                    <li className='event'>This is an event</li>
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
                             <Task key={task._id} task={task} />
