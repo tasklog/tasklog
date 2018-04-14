@@ -63,11 +63,12 @@ body {
 .page {
     float: left;
     vertical-align: top;
-    height: 100%;
 }
 
 .navigation {
+    height: 90vh;
     width: calc(100% - @page-width);
+    position: fixed;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -103,6 +104,8 @@ body {
     .is-rounded;
     .has-shadow;
 
+    margin-left: calc(100% - @page-width);
+    min-height: 100%;
     background: @white;
     width: @page-width;
     padding: 2.5% 5%;
@@ -145,8 +148,6 @@ body {
   margin-right: 15px;
 
     label {
-        background-color: @white;
-        // border: 2px solid @grey;
         cursor: pointer;
         position: absolute;
         border-radius: 50%;
@@ -172,13 +173,8 @@ body {
     input[type="checkbox"] {
         visibility: hidden;
 
-        &:checked + label {
-            // border-color: @success;
-            // background: @success-light;
-
-            &:after {
-                border-color: @success;
-            }
+        &:checked + label:after {
+            border-color: @success;
         }
     }
 }
