@@ -5,6 +5,7 @@ import { Tasks } from '../tasks/tasks'
 import dotenv from 'dotenv'
 import faker from 'faker'
 import moment from 'moment'
+import capitalize from 'capitalize'
 
 Meteor.methods({
     'seed.credentials'() {
@@ -25,7 +26,7 @@ Meteor.methods({
                 m.add(1, period)
                 Tasks.insert({
                     userId: Meteor.userId(),
-                    text: faker.lorem.sentence(),
+                    text: capitalize(faker.lorem.words(4)),
                     scheduled: createScheduledTimestamp(period, m),
                     status: 'INCOMPLETE',
                     due: null,
@@ -33,15 +34,15 @@ Meteor.methods({
                 })
                 Tasks.insert({
                     userId: Meteor.userId(),
-                    text: faker.lorem.sentence(),
+                    text: capitalize(faker.lorem.words(4)),
                     scheduled: createScheduledTimestamp(period, m),
                     status: 'COMPLETE',
                     due: null,
-                    completed: null
+                    completed: m.clone().add(Math.floor(Math.random() * 7), 'days').toDate()
                 })
                 Tasks.insert({
                     userId: Meteor.userId(),
-                    text: faker.lorem.sentence(),
+                    text: capitalize(faker.lorem.words(4)),
                     scheduled: createScheduledTimestamp(period, m),
                     status: 'CANCELLED',
                     due: null,

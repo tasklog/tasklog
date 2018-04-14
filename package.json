@@ -7,6 +7,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
     "body-parser": "^1.18.2",
+    "capitalize": "^1.0.0",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "faker": "^4.1.0",
@@ -21,6 +22,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "simpl-schema": "^1.4.2",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "victory": "^0.25.7"
   }
 }
