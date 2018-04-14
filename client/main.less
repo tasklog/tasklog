@@ -123,10 +123,10 @@ body {
     margin-bottom: 20px;
 }
 
-.daily-log {
+.log {
     list-style: none;
     
-    .task {
+    .task, .event {
         padding: 15px 15px 15px 0px;
 
         &:not(:last-child) {
@@ -137,6 +137,10 @@ body {
             text-decoration: line-through;
             color: #888;
         }
+    }
+
+    .event {
+        margin-left: 35px;
     }
 }
 

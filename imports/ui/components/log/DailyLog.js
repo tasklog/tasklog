@@ -33,10 +33,10 @@ class DailyLog extends Component {
         return (
             <div>
                 <Title>March 31, 2018</Title>
-                {this.state.calendarEvents.map(event => (
-                    <p key={event.id}>{event.summary}</p>
-                ))}
-                <ul className='daily-log'>
+                <ul className='log'>
+                    {this.state.calendarEvents.map(event => (
+                        <li className='event' key={event.id}>{event.summary}</li>
+                    ))}
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
                             <Task key={task._id} task={task} />
