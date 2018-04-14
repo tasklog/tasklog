@@ -21,7 +21,7 @@ Tasks.schema = new SimpleSchema({
     },
     scheduled: {
         required: false,
-        type: {
+        type: new SimpleSchema({
             day: {
                 type: SimpleSchema.Integer,
                 min: 1,
@@ -44,7 +44,7 @@ Tasks.schema = new SimpleSchema({
                 type: SimpleSchema.Integer,
                 required: true
             }
-        },
+        }),
     }
 })
 
