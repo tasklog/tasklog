@@ -16,6 +16,6 @@ install:
 - npm install --global now@10.2.2
 script:
 - now remove $NOW_NAME --safe --yes --token $NOW_TOKEN --team $NOW_TEAM || true
-- now deploy --docker --public --name $NOW_NAME --token $NOW_TOKEN --team $NOW_TEAM
+- travis_wait 30 now deploy --docker --public --name $NOW_NAME --token $NOW_TOKEN --team $NOW_TEAM
   --env MONGO_URL=$MONGO_URL --env ROOT_URL=$ROOT_URL --env GOOGLE_SECRET=$GOOGLE_SECRET
 - now alias --token $NOW_TOKEN --team $NOW_TEAM
