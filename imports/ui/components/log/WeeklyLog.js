@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Title from '/imports/ui/components/page/Title'
+import Task from '/imports/ui/components/page/Task'
 
 import Tasks from '/imports/ui/components/account/Tasks'
 
@@ -12,9 +13,7 @@ class WeeklyLog extends Component {
                 <ul className='daily-log'>
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
-                            <li key={task._id} className='task'>
-                                {task.text}
-                            </li>
+                            <Task key={task._id} task={task} />
                         ))}
                     </Tasks>
                 </ul>

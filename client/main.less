@@ -1,14 +1,17 @@
 // variables
 
 @white: #fff;
-@light: #F8F9FA;
+@light: #F8F9Fa;
+@grey: #EDEEF0;
 @primary: #2699FB;
+@success: #48C9B0;
+@success-light: #D1F2EB;
 @page-width: 75%;
 
 // mixins
 
 .is-rounded {
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .has-shadow {
@@ -121,6 +124,61 @@ body {
     list-style: none;
     
     .task {
-        margin-bottom: 20px;
+        padding: 15px 15px 15px 0px;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid @grey;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    }
+}
+
+.round {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+
+    label {
+        background-color: @white;
+        // border: 2px solid @grey;
+        cursor: pointer;
+        position: absolute;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        &:after {
+            border: 2px solid @grey;
+            border-top: none;
+            border-right: none;
+            content: "";
+            position: absolute;
+            top: 30%;
+            left: 20%;
+            transform: rotate(-45deg);
+            width: 50%;
+            height: 20%;
+        }
+    }
+
+    input[type="checkbox"] {
+        visibility: hidden;
+
+        &:checked + label {
+            // border-color: @success;
+            // background: @success-light;
+
+            &:after {
+                border-color: @success;
+            }
+        }
     }
 }
