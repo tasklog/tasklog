@@ -37,6 +37,13 @@ Meteor.methods({
             }
         })
     },
+    'task.toggle'(_id) {
+        if (Tasks.findOne({ _id }).status !== 'COMPLETE') {
+            Meteor.call('task.complete', _id)
+        } else {
+            Meteor.call('task.incomplete', _id)
+        }
+    },
     'task.reschedule'(_id, scheduled) {
         Tasks.update({ _id }, {
             $set: { scheduled }
