@@ -10,7 +10,7 @@ class MonthlyLog extends Component {
         return (
             <div>
                 <Title>March 2018</Title>
-                <ul className='daily-log'>
+                <ul className='log'>
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
                             <Task key={task._id} task={task} />
