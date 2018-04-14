@@ -1,4 +1,6 @@
-const createScheduledTimestamp = (period, date) => {
+import moment from 'moment'
+
+export const createScheduledTimestamp = (period, date) => {
     const timestamp = {}
     const m = moment(date)
     switch (period) {

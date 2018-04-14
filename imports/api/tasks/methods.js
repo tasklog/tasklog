@@ -8,7 +8,7 @@ Meteor.methods({
             userId: Meteor.userId(),
             text,
             scheduled,
-            status: 'DEFAULT',
+            status: 'INCOMPLETE',
             due: null,
             completed: null
         })
@@ -33,7 +33,7 @@ Meteor.methods({
         Tasks.update({ _id }, {
             $set: {
                 completed: null,
-                status: 'DEFAULT'
+                status: 'INCOMPLETE'
             }
         })
     },

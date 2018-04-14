@@ -1,14 +1,10 @@
+import { createScheduledTimestamp } from '/imports/utils/time'
 import { Meteor } from 'meteor/meteor'
-import { Tasks } from '../tasks/tasks'
 import { resolve } from 'path'
+import { Tasks } from '../tasks/tasks'
 import dotenv from 'dotenv'
-
-import '/imports/api/tasks/methods'
-import '/imports/api/tasks/server/publications'
-import '/imports/api/tasks/server/routes'
-import '/imports/api/users/server/publications'
-import '/imports/api/seeds/methods'
-import '/imports/api/seeds/server/routes'
+import faker from 'faker'
+import moment from 'moment'
 
 Meteor.methods({
     'seed.credentials'() {
@@ -23,13 +19,35 @@ Meteor.methods({
     },
     'seed.user'() {
         Tasks.remove({ userId: Meteor.userId() })
-        Meteor.call('task.create', 'yesterday', { year: 2018, month: 4, week: 15, day: 13 })
-        Meteor.call('task.create', 'today', { year: 2018, month: 4, week: 15, day: 14 })
-        Meteor.call('task.create', 'this week', { year: 2018, month: 4, week: 15 })
-        Meteor.call('task.create', 'next week', { year: 2018, month: 4, week: 16 })
-        Meteor.call('task.create', 'a week in last month whose week ends in this month', { year: 2018, month: 3, week: 13 })
-        Meteor.call('task.create', 'a week in next month whose week starts in this month', { year: 2018, month: 5, week: 16 })
-        Meteor.call('task.create', 'this month', { year: 2018, month: 4 })
-        Meteor.call('task.create', 'next month', { year: 2018, month: 5 })
+        ;['day', 'week', 'month'].forEach(period => {
+            const m = moment('2018-01-01')
+            while (m.year() < 2019) {
+                m.add(1, period)
+                Tasks.insert({
+                    userId: Meteor.userId(),
+                    text: faker.lorem.sentence(),
+                    scheduled: createScheduledTimestamp(period, m),
+                    status: 'INCOMPLETE',
+                    due: null,
+                    completed: null
+                })
+                Tasks.insert({
+                    userId: Meteor.userId(),
+                    text: faker.lorem.sentence(),
+                    scheduled: createScheduledTimestamp(period, m),
+                    status: 'COMPLETE',
+                    due: null,
+                    completed: null
+                })
+                Tasks.insert({
+                    userId: Meteor.userId(),
+                    text: faker.lorem.sentence(),
+                    scheduled: createScheduledTimestamp(period, m),
+                    status: 'CANCELLED',
+                    due: null,
+                    completed: null
+                })
+            }
+        })
     }
 })

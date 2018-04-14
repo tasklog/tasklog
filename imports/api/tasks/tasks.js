@@ -12,7 +12,7 @@ Tasks.schema = new SimpleSchema({
         type: String,
         required: true,
         allowedValues: [
-            'DEFAULT',
+            'INCOMPLETE',
             'COMPLETE',
             'MIGRATED_FORWARD',
             'MIGRATED_BACKWARD',
