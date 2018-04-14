@@ -3,7 +3,8 @@ import { Mongo } from 'meteor/mongo'
 import { Tasks } from './tasks'
 
 Meteor.methods({
-    'task.create'(text, scheduled=null) {
+    'task.create'(text, scheduled) {
+        console.log(text, scheduled)
         Tasks.insert({
             userId: Meteor.userId(),
             text,
