@@ -1,38 +1,45 @@
-import React, { Component } from 'react'
 import { Meteor } from 'meteor/meteor'
+import moment from 'moment'
+import React, { Component } from 'react'
+
+import { importGoogleCalendar } from '/imports/utils/gcal'
 
 import Title from '/imports/ui/components/page/Title'
 import Task from '/imports/ui/components/page/Task'
-
 import Tasks from '/imports/ui/components/account/Tasks'
-import { importGoogleCalendar } from '/imports/utils/gcal'
-import moment from 'moment'
 
 class DailyLog extends Component {
     state = {
-        isCalendarLoaded: false,
         calendarEvents: []
     }
-
-    async componentDidMount() {
+    static getDerivedStateFromProps(props) {
+        const { year, month, day } = props.match.params
+        return {
+            date: moment(new Date(year, month - 1, day))
+        }
+    }
+    componentDidMount() {
+        this.getEvents()
+    }
+    componentDidUpdate(props, state) {
+        if (!this.state.date.isSame(state.date)) {
+            this.getEvents()
+        }
+    }
+    getEvents = async () => {
         const cal = await importGoogleCalendar()
         const res = await cal.events.list({ calendarId: 'primary' })
-        const { year, month, day } = this.props.match.params
         this.setState({
             calendarEvents: res.result.items.filter(event => {
-                return moment(new Date(year, month - 1, day)).isSame(event.start.dateTime, 'day')
+                if (!event.start) return false
+                return this.state.date.isSame(event.start.dateTime, 'day')
             })
         })
     }
-
-    onComplete = (id) => {
-        Meteor.call('task.toggle', id)
-    }
-
     render() {
         return (
             <div>
-                <Title>March 31, 2018</Title>
+                <Title>{this.state.date.format('MMMM D, YYYY')}</Title>
                 <ul className='log'>
                     {this.state.calendarEvents.map(event => (
                         <li className='event' key={event.id}>{event.summary}</li>
