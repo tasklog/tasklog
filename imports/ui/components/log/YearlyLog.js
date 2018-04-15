@@ -9,7 +9,7 @@ class YearlyLog extends Component {
     render() {
         return (
             <div>
-                <Title>2018</Title>
+                <Title>{this.props.match.params.year}</Title>
                 <ul className='log'>
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 
 import Title from '/imports/ui/components/page/Title'
 import Task from '/imports/ui/components/page/Task'
@@ -6,10 +7,15 @@ import Task from '/imports/ui/components/page/Task'
 import Tasks from '/imports/ui/components/account/Tasks'
 
 class WeeklyLog extends Component {
+    get title() {
+        const { year, week } = this.props.match.params
+        const date = moment().day('Sunday').year(year).week(week)
+        return `Week of ${date.format('MMMM D, YYYY')}`
+    }
     render() {
         return (
             <div>
-                <Title>Week of March 31, 2018</Title>
+                <Title>{this.title}</Title>
                 <ul className='log'>
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
