@@ -12,6 +12,7 @@ class WeeklyLog extends Component {
         const date = moment().day('Sunday').year(year).week(week)
         return `Week of ${date.format('MMMM D, YYYY')}`
     }
+
     render() {
         return (
             <div>

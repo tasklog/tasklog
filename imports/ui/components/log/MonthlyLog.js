@@ -11,16 +11,38 @@ class MonthlyLog extends Component {
         const { year, month } = this.props.match.params
         return moment().year(year).month(month).format('MMMM YYYY')
     }
+
     render() {
+        const { year, month } = this.props.match.params
+        const baseMoment = moment().year(year).month(month - 1)
+        const firstMoment = baseMoment.clone().date(0)
+        const lastMoment = baseMoment.clone().date(baseMoment.daysInMonth())
+
+        const weeks = []
+        let week = firstMoment.week()
+
+        while (week <= lastMoment.week()) {
+            weeks.push({
+                weekNumber: week,
+                startDate: moment().day('Sunday').year(year).week(week)
+            })
+            week++
+        }
+
         return (
             <div>
                 <Title>{this.title}</Title>
                 <ul className='log'>
-                    <Tasks {...this.props.match.params}>
-                        {tasks => tasks.map(task => (
-                            <Task key={task._id} task={task} />
-                        ))}
-                    </Tasks>
+                    {weeks.map((week, i) => (
+                        <div key={week.weekNumber}>
+                            <p>{`Week of ${week.startDate.format('MMMM D, YYYY')}`}</p>
+                            <Tasks {...this.props.match.params} week={week.weekNumber.toString()}>
+                                {tasks => tasks.map(task => (
+                                    <Task key={task._id} task={task} />
+                                ))}
+                            </Tasks>
+                        </div>
+                    ))}
                 </ul>
             </div>
         )

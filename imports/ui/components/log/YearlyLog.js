@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 
 import Title from '/imports/ui/components/page/Title'
 import Task from '/imports/ui/components/page/Task'
@@ -11,11 +12,16 @@ class YearlyLog extends Component {
             <div>
                 <Title>{this.props.match.params.year}</Title>
                 <ul className='log'>
-                    <Tasks {...this.props.match.params}>
-                        {tasks => tasks.map(task => (
-                            <Task key={task._id} task={task} />
-                        ))}
-                    </Tasks>
+                    {moment.months().map((name, number) => (
+                        <div key={number}>
+                            <p>{name}</p>
+                            <Tasks {...this.props.match.params} month={number.toString()}>
+                                {tasks => tasks.map(task => (
+                                    <Task key={task._id} task={task} />
+                                ))}
+                            </Tasks>
+                        </div>
+                    ))}
                 </ul>
             </div>
         )

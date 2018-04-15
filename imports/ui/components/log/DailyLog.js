@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
-import moment from 'moment'
 import React, { Component } from 'react'
+import moment from 'moment'
 
 import { importGoogleCalendar } from '/imports/utils/gcal'
 
@@ -12,6 +12,7 @@ class DailyLog extends Component {
     state = {
         calendarEvents: []
     }
+
     static getDerivedStateFromProps(props) {
         const { year, month, day } = props.match.params
         return {
@@ -28,12 +29,17 @@ class DailyLog extends Component {
     }
     getEvents = async () => {
         const cal = await importGoogleCalendar()
-        const res = await cal.events.list({ calendarId: 'primary' })
+        const thisDay = this.state.date
+        const nextDay = thisDay.clone().add(1, 'days')
+
+        const res = await cal.events.list({
+            calendarId: 'primary',
+            timeMin: thisDay.format('YYYY-MM-DDTHH:mm:ssZ'),
+            timeMax: nextDay.format('YYYY-MM-DDTHH:mm:ssZ')
+        })
+
         this.setState({
-            calendarEvents: res.result.items.filter(event => {
-                if (!event.start) return false
-                return this.state.date.isSame(event.start.dateTime, 'day')
-            })
+            calendarEvents: res.result.items
         })
     }
     render() {
