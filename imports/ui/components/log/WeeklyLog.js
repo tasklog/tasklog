@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 import Title from '/imports/ui/components/page/Title'
-import Task from '/imports/ui/components/page/Task'
+import AddTask from '/imports/ui/components/task/AddTask'
+import Task from '/imports/ui/components/task/Task'
 
 import Tasks from '/imports/ui/components/account/Tasks'
 
@@ -18,6 +19,7 @@ class WeeklyLog extends Component {
             <div>
                 <Title>{this.title}</Title>
                 <ul className='log'>
+                    <AddTask period='week' {...this.props.match.params} />
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
                             <Task key={task._id} task={task} />

@@ -5,7 +5,8 @@ import moment from 'moment'
 import { importGoogleCalendar } from '/imports/utils/gcal'
 
 import Title from '/imports/ui/components/page/Title'
-import Task from '/imports/ui/components/page/Task'
+import AddTask from '/imports/ui/components/task/AddTask'
+import Task from '/imports/ui/components/task/Task'
 import Tasks from '/imports/ui/components/account/Tasks'
 
 class DailyLog extends Component {
@@ -47,6 +48,7 @@ class DailyLog extends Component {
             <div>
                 <Title>{this.state.date.format('MMMM D, YYYY')}</Title>
                 <ul className='log'>
+                    <AddTask period='day' {...this.props.match.params} />
                     {this.state.calendarEvents.map(event => (
                         <li className='event' key={event.id}>{event.summary}</li>
                     ))}

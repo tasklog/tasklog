@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 import Title from '/imports/ui/components/page/Title'
-import Task from '/imports/ui/components/page/Task'
+import AddTask from '/imports/ui/components/task/AddTask'
+import Task from '/imports/ui/components/task/Task'
 
 import Tasks from '/imports/ui/components/account/Tasks'
 
@@ -15,6 +16,7 @@ class YearlyLog extends Component {
                     {moment.months().map((name, number) => (
                         <div key={number}>
                             <p>{name}</p>
+                            <AddTask period='month' {...this.props.match.params} month={number.toString()} />
                             <Tasks {...this.props.match.params} month={number.toString()}>
                                 {tasks => tasks.map(task => (
                                     <Task key={task._id} task={task} />
