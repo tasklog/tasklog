@@ -9,3 +9,9 @@ router.post('/task/create', async (req, res) => {
     })
     res.send('ok')
 })
+
+router.get('/task/read', async (req, res) => {
+    res.send(JSON.stringify({
+        text: 'do the hello world'
+    }))
+})
