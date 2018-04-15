@@ -123,7 +123,6 @@ function validateTask(slots){
     const taskName = intentRequest.currentIntent.slots.TaskName;
     const sessionAttributes = intentRequest.sessionAttributes || {};
     
-    // Load confirmation history and track the current reservation.
     const task = String(JSON.stringify({ TaskName: taskName, LogChoice: logChoice, DateChoice: dateChoice, MonthChoice: monthChoice }));
     sessionAttributes.currentTask = task;
     
@@ -178,6 +177,45 @@ function validateTask(slots){
     { contentType: 'PlainText', content: 'Task has been added' }));
  }
  
+ function readTask(intentRequest, callback){
+    const slots = intentRequest.currentIntent.slots;
+    const sessionAttributes = intentRequest.sessionAttributes || {};
+    
+    const https = require('https');
+    
+    var options = {
+      hostname: 'fuzzy-lizard-11.localtunnel.me',
+      port: 443,
+      path: '/api/task/read',
+      method: 'GET'
+    };
+    
+    var req = https.request(options, (res) => {
+      console.log('statusCode:', res.statusCode);
+      console.log('headers:', res.headers);
+    let data = '';
+      res.on('data', (d) => {
+        data+=d;
+      });
+      res.on('end', () => {
+        data = JSON.parse(data); 
+        callback(close(sessionAttributes, 'Fulfilled',{
+            contentType: 'PlainText', 
+            content: data.text
+        }));
+      });
+    });
+    
+    req.on('error', (e) => {
+      console.error(e);
+    });
+    
+    req.end();
+    
+    delete sessionAttributes.currentTask;
+    
+ }
+ 
   // --------------- Intents -----------------------
 
 /**
@@ -193,9 +231,10 @@ function dispatch(intentRequest, callback) {
     if (intentName === 'SetTask') {
         return setTask(intentRequest, callback);
     } else if (intentName === 'ReadTask') {
-        //return readTask(intentRequest, callback);
+        return readTask(intentRequest, callback);
     }
     throw new Error(`Intent with name ${intentName} not supported`);
+    
 }
 
 // --------------- Main handler -----------------------
