@@ -8,6 +8,10 @@ class Task extends Component {
         Meteor.call('task.toggle', id)
     }
 
+    onDelete = (id) => {
+        Meteor.call('task.delete', id)
+    }
+
     render() {
         const { task } = this.props
 
@@ -25,7 +29,7 @@ class Task extends Component {
                 <span className={task.status === 'COMPLETE' ? 'completed' : ''}>
                     {task.text}
                 </span>
-                <span style={{ float: 'right' }}>×</span>
+                <span className='delete' aria-label='delete' onClick={() => this.onDelete(task._id)}>×</span>
             </li>
         )
     }

@@ -139,9 +139,34 @@ body {
         }
     }
 
+    .task .delete {
+        float: right;
+        cursor: pointer;
+    }
+
     .event {
         margin-left: 35px;
         color: @primary;
+    }
+}
+
+.new-task {
+    margin-top: 10px;
+    margin-bottom: -10px;
+    position: relative;
+
+    input {
+        box-sizing: border-box;
+        padding: 10px 0;
+        background: transparent;
+        border: none;
+        width: 100%;
+        padding-right: 80px;
+        font-size: 1em;
+
+        &:focus {
+            outline: 0;
+        }
     }
 }
 
