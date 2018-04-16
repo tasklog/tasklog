@@ -119,35 +119,45 @@ body {
 
 // other styles
 
-.title {
-    margin-bottom: 20px;
-}
-
 .log {
     list-style: none;
     
     .task, .event {
         padding: 15px 15px 15px 0px;
-
+        
         &:not(:last-child) {
             border-bottom: 1px solid @grey;
         }
-
+        
         .completed {
             text-decoration: line-through;
             color: #888;
         }
     }
+    
+    .task {
+        .right {
+            float: right;
+        }
 
-    .task .delete {
-        float: right;
-        cursor: pointer;
+        .delete {
+            margin-left: 15px;
+            cursor: pointer;
+
+            &::before {
+                content: '×';
+            }
+        }
     }
-
+    
     .event {
         margin-left: 35px;
         color: @primary;
     }
+}
+
+.title {
+    margin-bottom: 20px;
 }
 
 .new-task {
@@ -168,6 +178,13 @@ body {
             outline: 0;
         }
     }
+}
+
+.DayPickerInput input {
+    padding: .5em 0;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-weight: 400;
 }
 
 .round {
