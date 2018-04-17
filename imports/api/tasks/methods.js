@@ -10,7 +10,8 @@ Meteor.methods({
             scheduled,
             status: 'INCOMPLETE',
             due: null,
-            completed: null
+            completed: null,
+            createdAt: new Date()
         })
     },
     'task.delete'(_id) {

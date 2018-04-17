@@ -8,6 +8,7 @@ Tasks.schema = new SimpleSchema({
     userId: { type: String, required: true },
     due: { type: Date, required: false },
     completed: { type: Date, required: false },
+    createdAt: { type: Date, required: true },
     status: {
         type: String,
         required: true,

@@ -25,6 +25,7 @@ Meteor.methods({
             while (m.year() < 2019) {
                 m.add(1, period)
                 Tasks.insert({
+                    createdAt: new Date(),
                     userId: Meteor.userId(),
                     text: capitalize(faker.lorem.words(4)),
                     scheduled: createScheduledTimestamp(period, m),
@@ -33,6 +34,7 @@ Meteor.methods({
                     completed: null
                 })
                 Tasks.insert({
+                    createdAt: new Date(),
                     userId: Meteor.userId(),
                     text: capitalize(faker.lorem.words(4)),
                     scheduled: createScheduledTimestamp(period, m),
@@ -41,6 +43,7 @@ Meteor.methods({
                     completed: m.clone().add(Math.floor(Math.random() * 7), 'days').toDate()
                 })
                 Tasks.insert({
+                    createdAt: new Date(),
                     userId: Meteor.userId(),
                     text: capitalize(faker.lorem.words(4)),
                     scheduled: createScheduledTimestamp(period, m),

@@ -11,6 +11,8 @@ router.post('/task/create', async (req, res) => {
 })
 
 router.get('/task/read', async (req, res) => {
+    // Joe, return the latest task here.
+    // You should be able to find by `createdAt` property.
     res.send(JSON.stringify({
         text: 'do the hello world'
     }))
