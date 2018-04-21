@@ -18,11 +18,11 @@ ecmascript@0.10.0             # Enable ECMAScript2015+ syntax in app code
 shell-server@0.3.1            # Server-side component of the `meteor shell` command
 
 accounts-google
-# accounts-password           # Disabled to avoid bcrypt warning until needed
-service-configuration
-less
 aldeed:collection2
-react-meteor-data
-ostrio:meteor-root
-webapp
 dispatch:run-as-user
+less
+ostrio:meteor-root
+react-meteor-data
+seba:method-hooks
+service-configuration
+webapp
