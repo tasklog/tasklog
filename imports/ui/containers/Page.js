@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 class Page extends Component {
     render() {
@@ -10,4 +12,4 @@ class Page extends Component {
     }
 }
 
-export default Page
+export default DragDropContext(HTML5Backend)(Page)
