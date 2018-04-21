@@ -1,3 +1,4 @@
+import { buildScheduledQuery } from '/imports/utils/time'
 import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
 import { Tasks } from './tasks'
@@ -10,11 +11,25 @@ Meteor.methods({
             scheduled,
             status: 'INCOMPLETE',
             due: null,
-            completed: null
+            completed: null,
+            order: -1,
+            createdAt: new Date()
         })
+        const { day, week, month, year } = scheduled || {}
+        const query = buildScheduledQuery(scheduled)
+        query.userId = Meteor.userId()
+        Tasks.update(query, { $inc: { order: 1 } }, { multi: true })
     },
     'task.delete'(_id) {
-        Tasks.remove({ _id })
+        const taskQuery = { _id, userId: Meteor.userId() }
+        const { order, scheduled } = Tasks.findOne(taskQuery)
+        const updateQuery = {
+            ...buildScheduledQuery(scheduled),
+            userId: Meteor.userId(),
+            order: { $gt: order }
+        }
+        Tasks.remove(taskQuery)
+        Tasks.update(updateQuery, { $inc: { order: -1 } }, { multi: true })
     },
     'task.setStatus'(_id, status) {
         Tasks.update({ _id }, {

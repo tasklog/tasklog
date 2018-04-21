@@ -13,11 +13,11 @@ class Task extends Component {
         selectedDay: undefined
     }
 
-    componentDidMount() {
-        this.setState({
-            task: this.props.task,
-            selectedDay: this.props.task.due !== null ? this.props.task.due : undefined
-        })
+    static getDerivedStateFromProps(props) {
+        return {
+            task: props.task,
+            selectedDay: props.task.due !== null ? props.task.due : undefined
+        }
     }
 
     onComplete = (id) => {
@@ -38,6 +38,7 @@ class Task extends Component {
 
         return (
             <li className='task'>
+                <span>{task.order}</span>
                 <div className='round'>
                     <input
                         id={`checkbox-${task._id}`}

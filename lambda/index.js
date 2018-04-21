@@ -126,17 +126,17 @@ function validateTask(slots){
     const task = String(JSON.stringify({ TaskName: taskName, LogChoice: logChoice, DateChoice: dateChoice, MonthChoice: monthChoice }));
     sessionAttributes.currentTask = task;
     
-    if (intentRequest.invocationSource === 'DialogCodeHook') {
-        // Validate any slots which have been specified.  If any are invalid, re-elicit for their value
-        const validationResult = validateTask(intentRequest.currentIntent.slots);
-        if (!validationResult.isValid) {
-            const slots = intentRequest.currentIntent.slots;
-            slots[`${validationResult.violatedSlot}`] = null;
-            callback(elicitSlot(sessionAttributes, intentRequest.currentIntent.name,
-            slots, validationResult.violatedSlot, validationResult.message));
-            return;
-        }
-    }
+    // if (intentRequest.invocationSource === 'DialogCodeHook') {
+    //     // Validate any slots which have been specified.  If any are invalid, re-elicit for their value
+    //     const validationResult = validateTask(intentRequest.currentIntent.slots);
+    //     if (!validationResult.isValid) {
+    //         const slots = intentRequest.currentIntent.slots;
+    //         slots[`${validationResult.violatedSlot}`] = null;
+    //         callback(elicitSlot(sessionAttributes, intentRequest.currentIntent.name,
+    //         slots, validationResult.violatedSlot, validationResult.message));
+    //         return;
+    //     }
+    // }
     
     const https = require('https');
     
@@ -145,7 +145,7 @@ function validateTask(slots){
     });
     
     var options = {
-      hostname: 'fuzzy-lizard-11.localtunnel.me',
+      hostname: 'tasklog.now.sh',
       port: 443,
       path: '/api/task/create',
       method: 'POST',
@@ -162,6 +162,10 @@ function validateTask(slots){
       res.on('data', (d) => {
         process.stdout.write(d);
       });
+      
+      res.on('end', () => {
+          callback(close(sessionAttributes, 'Fulfilled', { contentType: 'PlainText', content: 'Task has been added' }));
+      })
     });
     
     req.on('error', (e) => {
@@ -172,9 +176,6 @@ function validateTask(slots){
     req.end();
     
     delete sessionAttributes.currentTask;
-    
-    callback(close(sessionAttributes, 'Fulfilled',
-    { contentType: 'PlainText', content: 'Task has been added' }));
  }
  
  function readTask(intentRequest, callback){
@@ -184,7 +185,7 @@ function validateTask(slots){
     const https = require('https');
     
     var options = {
-      hostname: 'fuzzy-lizard-11.localtunnel.me',
+      hostname: 'tasklog.now.sh',
       port: 443,
       path: '/api/task/read',
       method: 'GET'
@@ -223,7 +224,7 @@ function validateTask(slots){
  */
 function dispatch(intentRequest, callback) {
     // console.log(JSON.stringify(intentRequest, null, 2));
-    console.log(`dispatch userId=${intentRequest.userId}, intentName=${intentRequest.currentIntent.name}`);
+    // console.log(`dispatch userId=${intentRequest.userId}, intentName=${intentRequest.currentIntent.name}`);
 
     const intentName = intentRequest.currentIntent.name;
 
@@ -250,7 +251,7 @@ exports.handler = (event, context, callback) => {
     try {
         // By default, treat the user request as coming from the America/New_York time zone.
         process.env.TZ = 'America/New_York';
-        console.log(`event.bot.name=${event.bot.name}`);
+        // console.log(`event.bot.name=${event.bot.name}`);
 
         /**
          * Uncomment this if statement and populate with your Lex bot name, alias and / or version as
@@ -265,4 +266,4 @@ exports.handler = (event, context, callback) => {
     } catch (err) {
         callback(err);
     }
-};
+};                                  

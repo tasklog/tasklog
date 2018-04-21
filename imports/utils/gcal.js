@@ -18,7 +18,9 @@ export async function importGoogleCalendar() {
     })
     // lazy load calendar JS
     await window.gapi.client.init({
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+        requestOfflineToken: true,
+        forceApprovalPrompt: true
     })
     return window.gapi.client.calendar
 }

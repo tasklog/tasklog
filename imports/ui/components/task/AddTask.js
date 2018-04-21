@@ -17,7 +17,6 @@ class AddTask extends Component {
         if (week) m.day('Sunday').month(month)
         if (day) m.date(day)
         Meteor.call('task.create', text, createScheduledTimestamp(period, m))
-        console.log(createScheduledTimestamp(period, m))
 
         this.input.current.value = ''
     }
