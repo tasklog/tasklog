@@ -29,19 +29,19 @@ class DailyLog extends Component {
         }
     }
     getEvents = async () => {
-        const cal = await importGoogleCalendar()
-        const thisDay = this.state.date
-        const nextDay = thisDay.clone().add(1, 'days')
+        // const cal = await importGoogleCalendar()
+        // const thisDay = this.state.date
+        // const nextDay = thisDay.clone().add(1, 'days')
 
-        const res = await cal.events.list({
-            calendarId: 'primary',
-            timeMin: thisDay.format('YYYY-MM-DDTHH:mm:ssZ'),
-            timeMax: nextDay.format('YYYY-MM-DDTHH:mm:ssZ')
-        })
+        // const res = await cal.events.list({
+        //     calendarId: 'primary',
+        //     timeMin: thisDay.format('YYYY-MM-DDTHH:mm:ssZ'),
+        //     timeMax: nextDay.format('YYYY-MM-DDTHH:mm:ssZ')
+        // })
 
-        this.setState({
-            calendarEvents: res.result.items
-        })
+        // this.setState({
+        //     calendarEvents: res.result.items
+        // })
     }
     render() {
         return (
