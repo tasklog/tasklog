@@ -6,6 +6,7 @@ import 'react-day-picker/lib/style.css'
 import { formatDate, parseDate } from 'react-day-picker/moment'
 
 import Title from '/imports/ui/components/page/Title'
+import Sortable from '/imports/ui/components/task/Sortable'
 
 class Task extends Component {
     state = {
@@ -33,39 +34,52 @@ class Task extends Component {
         Meteor.call('task.delete', id)
     }
 
+    reorder = (dragIndex, hoverIndex) => {
+        const { tasks } = this.props
+        Meteor.call('task.reorder', tasks[dragIndex]._id, tasks[hoverIndex]._id)
+    }
+
     render() {
         const { task, selectedDay } = this.state
 
         return (
-            <li className='task'>
-                <span>{task.order}</span>
-                <div className='round'>
-                    <input
-                        id={`checkbox-${task._id}`}
-                        type='checkbox'
-                        checked={task.status === 'COMPLETE'}
-                        onChange={() => this.onComplete(task._id)}
-                    />
-                    <label htmlFor={`checkbox-${task._id}`}></label>
-                </div>
+            <Sortable
+                index={this.props.task.order}
+                id={this.props.task._id}
+                reorder={this.reorder}
+            >
+                {opacity => (
+                    <li className='task' style={{ opacity }}>
+                        <span>{task.order}</span>
+                        <div className='round'>
+                            <input
+                                id={`checkbox-${task._id}`}
+                                type='checkbox'
+                                checked={task.status === 'COMPLETE'}
+                                onChange={() => this.onComplete(task._id)}
+                            />
+                            <label htmlFor={`checkbox-${task._id}`}></label>
+                        </div>
 
-                <span className={task.status === 'COMPLETE' ? 'completed' : ''}>
-                    {task.text}
-                </span>
+                        <span className={task.status === 'COMPLETE' ? 'completed' : ''}>
+                            {task.text}
+                        </span>
 
-                <span className='right'>
-                    Due on &nbsp;
-                    <DayPickerInput
-                        formatDate={formatDate}
-                        parseDate={parseDate}
-                        format='LL'
-                        placeholder='Choose Date'
-                        value={selectedDay}
-                        onDayChange={this.onChangeDue}
-                    />
-                    <span className='delete' aria-label='delete' onClick={() => this.onDelete(task._id)} />
-                </span>
-            </li>
+                        <span className='right'>
+                            Due on &nbsp;
+                            <DayPickerInput
+                                formatDate={formatDate}
+                                parseDate={parseDate}
+                                format='LL'
+                                placeholder='Choose Date'
+                                value={selectedDay}
+                                onDayChange={this.onChangeDue}
+                            />
+                            <span className='delete' aria-label='delete' onClick={() => this.onDelete(task._id)} />
+                        </span>
+                    </li>
+                )}
+            </Sortable>
         )
     }
 }

@@ -43,6 +43,7 @@ class DailyLog extends Component {
         //     calendarEvents: res.result.items
         // })
     }
+
     render() {
         return (
             <div>
@@ -54,7 +55,7 @@ class DailyLog extends Component {
                     ))}
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
-                            <Task key={task._id} task={task} />
+                            <Task key={task._id} task={task} tasks={tasks} />
                         ))}
                     </Tasks>
                 </ul>

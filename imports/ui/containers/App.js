@@ -7,7 +7,6 @@ import Login from '/imports/ui/components/account/Login'
 import Container from '/imports/ui/components/layout/Container'
 import Navigation from '/imports/ui/components/layout/Navigation'
 import Page from '/imports/ui/containers/Page'
-import Cards from '/imports/ui/components/test/Cards'
 
 import NoMatch from '/imports/ui/components/page/NoMatch'
 import Graph from '/imports/ui/components/layout/Graph'
@@ -33,7 +32,6 @@ class App extends Component {
                                     <Route exact path='/m/:year/:month' component={MonthlyLog} />
                                     <Route exact path='/y/:year' component={YearlyLog} />
                                     <Route exact path='/graph' component={Graph} />
-                                    <Route exact path='/test' component={Cards} />
                                     <Route component={NoMatch} />
                                 </Switch>
                             </Page>

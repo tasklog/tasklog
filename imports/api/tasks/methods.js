@@ -31,6 +31,14 @@ Meteor.methods({
         Tasks.remove(taskQuery)
         Tasks.update(updateQuery, { $inc: { order: -1 } }, { multi: true })
     },
+    'task.reorder'(dragId, hoverId) {
+        const dragQuery = { _id: dragId, userId: Meteor.userId() }
+        const hoverQuery = { _id: hoverId, userId: Meteor.userId() }
+        const { order: dragOrder } = Tasks.findOne(dragQuery)
+        const { order: hoverOrder } = Tasks.findOne(hoverQuery)
+        Tasks.update(dragQuery, { $set: { order: hoverOrder } })
+        Tasks.update(hoverQuery, { $set: { order: dragOrder } })
+    },
     'task.setStatus'(_id, status) {
         Tasks.update({ _id }, {
             $set: { status }
