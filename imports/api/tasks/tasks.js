@@ -9,6 +9,7 @@ Tasks.schema = new SimpleSchema({
     due: { type: Date, required: false },
     completed: { type: Date, required: false },
     createdAt: { type: Date, required: true },
+    order: { type: SimpleSchema.Integer, required: true },
     status: {
         type: String,
         required: true,

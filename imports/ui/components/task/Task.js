@@ -38,6 +38,7 @@ class Task extends Component {
 
         return (
             <li className='task'>
+                <span>{task.order}</span>
                 <div className='round'>
                     <input
                         id={`checkbox-${task._id}`}

@@ -14,3 +14,29 @@ export const createScheduledTimestamp = (period, date) => {
     }
     return timestamp
 }
+
+export const buildScheduledQuery = ({ day, week, month, year } = {}) => {
+    const query = {}
+    if (day) {
+        query['scheduled.day'] = day
+        query['scheduled.month'] = month
+        query['scheduled.year'] = year
+    } else if (week) {
+        query['scheduled.day'] = { $type: 'double' }
+        query['scheduled.week'] = week
+        query['scheduled.year'] = year
+    } else if (month) {
+        const baseMoment = moment().year(year).month(month - 1)
+        const firstMoment = baseMoment.clone().date(0)
+        const lastMoment = baseMoment.clone().date(baseMoment.daysInMonth())
+        query['scheduled.day'] = null
+        query['scheduled.week'] = { $gte: firstMoment.week(), $lte: lastMoment.week() }
+        query['scheduled.month'] = { $type: 'double' }
+        query['scheduled.year'] = year
+    } else if (year) {
+        query['scheduled.week'] = null
+        query['scheduled.month'] = { $type: 'double' }
+        query['scheduled.year'] = year
+    }
+    return query
+}

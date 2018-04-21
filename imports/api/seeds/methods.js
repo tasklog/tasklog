@@ -20,6 +20,7 @@ Meteor.methods({
     },
     'seed.user'() {
         Tasks.remove({ userId: Meteor.userId() })
+        return
         ;['day', 'week', 'month'].forEach(period => {
             const m = moment('2018-01-01')
             while (m.year() < 2019) {
