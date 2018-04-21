@@ -50,7 +50,6 @@ class Task extends Component {
             >
                 {opacity => (
                     <li className='task' style={{ opacity }}>
-                        <span>{task.order}</span>
                         <div className='round'>
                             <input
                                 id={`checkbox-${task._id}`}
