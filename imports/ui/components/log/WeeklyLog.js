@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
-import Title from '/imports/ui/components/page/Title'
+import Arrows from '/imports/ui/components/page/Arrows'
 import AddTask from '/imports/ui/components/task/AddTask'
 import Task from '/imports/ui/components/task/Task'
 
@@ -17,7 +17,7 @@ class WeeklyLog extends Component {
     render() {
         return (
             <div>
-                <Title>{this.title}</Title>
+                <Arrows title={this.title} />
                 <ul className='log'>
                     <AddTask period='week' {...this.props.match.params} />
                     <Tasks {...this.props.match.params}>

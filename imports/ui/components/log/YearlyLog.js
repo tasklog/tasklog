@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
-import Title from '/imports/ui/components/page/Title'
+import Arrows from '/imports/ui/components/page/Arrows'
 import AddTask from '/imports/ui/components/task/AddTask'
 import Task from '/imports/ui/components/task/Task'
 
@@ -11,7 +11,7 @@ class YearlyLog extends Component {
     render() {
         return (
             <div>
-                <Title>{this.props.match.params.year}</Title>
+                <Arrows title={this.props.match.params.year} />
                 <ul className='log'>
                     {moment.months().map((name, number) => (
                         <div key={number}>

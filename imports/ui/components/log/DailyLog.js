@@ -4,7 +4,7 @@ import moment from 'moment'
 
 import { importGoogleCalendar } from '/imports/utils/gcal'
 
-import Title from '/imports/ui/components/page/Title'
+import Arrows from '/imports/ui/components/page/Arrows'
 import AddTask from '/imports/ui/components/task/AddTask'
 import Task from '/imports/ui/components/task/Task'
 import Tasks from '/imports/ui/components/account/Tasks'
@@ -47,7 +47,7 @@ class DailyLog extends Component {
     render() {
         return (
             <div>
-                <Title>{this.state.date.format('MMMM D, YYYY')}</Title>
+                <Arrows title={this.state.date.format('MMMM D, YYYY')} />
                 <ul className='log'>
                     <AddTask period='day' {...this.props.match.params} />
                     {this.state.calendarEvents.map(event => (

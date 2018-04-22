@@ -31,6 +31,12 @@ a {
     color: inherit;
 }
 
+button.reset {
+    border: none;
+    background: none;
+    outline: 0;
+}
+
 // fonts
 
 @font-face {
@@ -119,6 +125,25 @@ body {
 
 // other styles
 
+.arrow {
+    @negative-margin: 0.45rem;
+    color: #333;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 250ms;
+    &--right {
+        transform: translateX(@negative-margin);
+    }
+    &--left {
+        transform: translateX(-@negative-margin);
+    }
+}
+
+.arrows {
+    display: flex;
+    justify-content: space-between;
+}
+
 .log {
     list-style: none;
 
@@ -172,10 +197,6 @@ body {
         margin-left: 35px;
         color: @primary;
     }
-}
-
-.title {
-    margin-bottom: 20px;
 }
 
 .new-task {
