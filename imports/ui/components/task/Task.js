@@ -21,8 +21,8 @@ class Task extends Component {
         }
     }
 
-    onComplete = (id) => {
-        Meteor.call('task.toggle', id)
+    onComplete = () => {
+        Meteor.call('task.toggle', this.state.task._id)
     }
 
     onChangeDue = (day) => {
@@ -32,6 +32,16 @@ class Task extends Component {
 
     onDelete = (id) => {
         Meteor.call('task.delete', id)
+    }
+
+    onTextChange = (event) => {
+        Meteor.call('task.setText', this.state.task._id, event.target.value)
+    }
+
+    onKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            event.target.blur()
+        }
     }
 
     reorder = (dragIndex, hoverIndex) => {
@@ -55,14 +65,18 @@ class Task extends Component {
                                 id={`checkbox-${task._id}`}
                                 type='checkbox'
                                 checked={task.status === 'COMPLETE'}
-                                onChange={() => this.onComplete(task._id)}
+                                onChange={this.onComplete}
                             />
                             <label htmlFor={`checkbox-${task._id}`}></label>
                         </div>
 
-                        <span className={task.status === 'COMPLETE' ? 'completed' : ''}>
-                            {task.text}
-                        </span>
+                        <input
+                            type='text'
+                            className={task.status === 'COMPLETE' ? 'completed' : ''}
+                            value={task.text}
+                            onChange={this.onTextChange}
+                            onKeyPress={this.onKeyPress}
+                        />
 
                         <span className='right'>
                             Due on &nbsp;

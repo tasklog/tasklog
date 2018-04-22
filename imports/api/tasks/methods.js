@@ -39,6 +39,11 @@ Meteor.methods({
         Tasks.update(dragQuery, { $set: { order: hoverOrder } })
         Tasks.update(hoverQuery, { $set: { order: dragOrder } })
     },
+    'task.setText'(_id, text) {
+        Tasks.update({ _id, userId: Meteor.userId() }, {
+            $set: { text }
+        })
+    },
     'task.setStatus'(_id, status) {
         Tasks.update({ _id }, {
             $set: { status }
