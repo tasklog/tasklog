@@ -22,7 +22,7 @@ class WeeklyLog extends Component {
                     <AddTask period='week' {...this.props.match.params} />
                     <Tasks {...this.props.match.params}>
                         {tasks => tasks.map(task => (
-                            <Task key={task._id} task={task} />
+                            <Task key={task._id} task={task} tasks={tasks} />
                         ))}
                     </Tasks>
                 </ul>
