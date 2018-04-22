@@ -125,6 +125,15 @@ body {
 
 // other styles
 
+.title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media screen and (max-width: 700px) {
+        font-size: 1rem;
+    }
+}
+
 .arrow {
     @negative-margin: 0.45rem;
     color: #333;
@@ -142,10 +151,16 @@ body {
 .arrows {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 3rem;
+    align-items: center;
 }
 
 .log {
     list-style: none;
+
+    div:not(:first-child) p {
+        margin-top: 2rem;
+    }
 
     .task, .event {
         padding: 15px 15px 15px 0px;
