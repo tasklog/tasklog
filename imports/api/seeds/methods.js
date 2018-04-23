@@ -1,11 +1,12 @@
 import { createScheduledTimestamp } from '/imports/utils/time'
+import { encode } from 'base-64'
 import { Meteor } from 'meteor/meteor'
 import { resolve } from 'path'
 import { Tasks } from '../tasks/tasks'
+import capitalize from 'capitalize'
 import dotenv from 'dotenv'
 import faker from 'faker'
 import moment from 'moment'
-import capitalize from 'capitalize'
 
 Meteor.methods({
     'seed.credentials'() {
@@ -37,7 +38,7 @@ Meteor.methods({
         const createTask = (i, timestamp) => Tasks.insert({
             createdAt: new Date(),
             userId: Meteor.userId(),
-            text: randomText(),
+            text: encode(randomText()),
             scheduled: timestamp,
             status: 'INCOMPLETE',
             due: null,

@@ -1,4 +1,5 @@
 import 'react-day-picker/lib/style.css'
+import { decode } from 'base-64'
 import { formatDate, parseDate } from 'react-day-picker/moment'
 import { Meteor } from 'meteor/meteor'
 import { notifier } from '/imports/utils/notifications'
@@ -35,6 +36,7 @@ class Task extends Component {
         notifier.confirm('Are you sure you want to delete this task?', () => {
             Meteor.call('task.delete', id)
         })
+        document.querySelector('#awn-confirm-ok').focus()
     }
 
     onTextChange = (event) => {
@@ -76,7 +78,7 @@ class Task extends Component {
                         <input
                             type='text'
                             className={task.status === 'COMPLETE' ? 'completed' : ''}
-                            value={task.text}
+                            value={decode(task.text || '')}
                             onChange={this.onTextChange}
                             onKeyPress={this.onKeyPress}
                         />

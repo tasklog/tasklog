@@ -2,12 +2,13 @@ import { buildScheduledQuery } from '/imports/utils/time'
 import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
 import { Tasks } from './tasks'
+import { encode } from 'base-64'
 
 Meteor.methods({
     'task.create'(text, scheduled) {
         Tasks.insert({
             userId: Meteor.userId(),
-            text,
+            text: encode(text),
             scheduled,
             status: 'INCOMPLETE',
             due: null,
@@ -41,7 +42,7 @@ Meteor.methods({
     },
     'task.setText'(_id, text) {
         Tasks.update({ _id, userId: Meteor.userId() }, {
-            $set: { text }
+            $set: { text: encode(text) }
         })
     },
     'task.setStatus'(_id, status) {

@@ -4,7 +4,7 @@ export const Tasks = new Mongo.Collection('tasks')
 
 Tasks.schema = new SimpleSchema({
     _id: { type: String, required: true },
-    text: { type: String, required: true },
+    text: { type: String, required: false },
     userId: { type: String, required: true },
     due: { type: Date, required: false },
     completed: { type: Date, required: false },
