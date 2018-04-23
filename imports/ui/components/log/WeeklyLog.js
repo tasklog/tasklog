@@ -1,3 +1,4 @@
+import { dateTitle } from '/imports/utils/time'
 import React, { Component } from 'react'
 import moment from 'moment'
 
@@ -10,8 +11,7 @@ import Tasks from '/imports/ui/components/account/Tasks'
 class WeeklyLog extends Component {
     get title() {
         const { year, week } = this.props.match.params
-        const date = moment().day('Sunday').year(year).week(week)
-        return `Week of ${date.format('MMMM D, YYYY')}`
+        return dateTitle('week', moment().day('Sunday').year(year).week(week))
     }
 
     render() {

@@ -1,11 +1,10 @@
-import { Meteor } from 'meteor/meteor'
-import React, { Component } from 'react'
-import moment from 'moment'
-
+import { dateTitle } from '/imports/utils/time'
 import { importGoogleCalendar } from '/imports/utils/gcal'
-
-import Arrows from '/imports/ui/components/page/Arrows'
+import { Meteor } from 'meteor/meteor'
 import AddTask from '/imports/ui/components/task/AddTask'
+import Arrows from '/imports/ui/components/page/Arrows'
+import moment from 'moment'
+import React, { Component } from 'react'
 import Task from '/imports/ui/components/task/Task'
 import Tasks from '/imports/ui/components/account/Tasks'
 
@@ -47,7 +46,7 @@ class DailyLog extends Component {
     render() {
         return (
             <div>
-                <Arrows title={this.state.date.format('MMMM D, YYYY')} />
+                <Arrows title={dateTitle('day', this.state.date)} />
                 <ul className='log'>
                     <AddTask period='day' {...this.props.match.params} />
                     {this.state.calendarEvents.map(event => (

@@ -15,6 +15,16 @@ export const createScheduledTimestamp = (period, date) => {
     return timestamp
 }
 
+export const dateTitle = (period, date) => {
+    date = moment(date)
+    switch (period) {
+        case 'day': return date.format('MMMM D, YYYY')
+        case 'week': return `Week of ${date.format('MMMM D, YYYY')}`
+        case 'month': return date.format('MMMM YYYY')
+        case 'year': return date.year()
+    }
+}
+
 export const buildScheduledQuery = ({ day, week, month, year } = {}) => {
     const query = {}
     if (day) {

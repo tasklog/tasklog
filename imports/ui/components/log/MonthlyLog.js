@@ -1,3 +1,4 @@
+import { dateTitle } from '/imports/utils/time'
 import React, { Component } from 'react'
 import moment from 'moment'
 
@@ -10,7 +11,7 @@ import Tasks from '/imports/ui/components/account/Tasks'
 class MonthlyLog extends Component {
     get title() {
         const { year, month } = this.props.match.params
-        return moment().year(year).month(month - 1).format('MMMM YYYY')
+        return dateTitle('month', moment().year(year).month(month - 1))
     }
 
     render() {

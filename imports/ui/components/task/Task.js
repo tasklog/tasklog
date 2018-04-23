@@ -65,47 +65,50 @@ class Task extends Component {
             >
                 {opacity => (
                     <li className='task' style={{ opacity }}>
-                        <div className='round'>
+                        <article tabIndex='0' aria-label={decode(task.text || '')}>
+                            <div className='round'>
+                                <input
+                                    tabIndex='0'
+                                    id={`checkbox-${task._id}`}
+                                    type='checkbox'
+                                    checked={task.status === 'COMPLETE'}
+                                    onChange={this.onComplete}
+                                />
+                                <label htmlFor={`checkbox-${task._id}`}></label>
+                            </div>
+
                             <input
-                                id={`checkbox-${task._id}`}
-                                type='checkbox'
-                                checked={task.status === 'COMPLETE'}
-                                onChange={this.onComplete}
+                                type='text'
+                                className={task.status === 'COMPLETE' ? 'completed' : ''}
+                                value={decode(task.text || '')}
+                                onChange={this.onTextChange}
+                                onKeyPress={this.onKeyPress}
                             />
-                            <label htmlFor={`checkbox-${task._id}`}></label>
-                        </div>
 
-                        <input
-                            type='text'
-                            className={task.status === 'COMPLETE' ? 'completed' : ''}
-                            value={decode(task.text || '')}
-                            onChange={this.onTextChange}
-                            onKeyPress={this.onKeyPress}
-                        />
+                            <div className='spacer' />
 
-                        <div className='spacer' />
+                            <span className='date-picker'>
+                                Due on &nbsp;
+                                <DayPickerInput
+                                    formatDate={formatDate}
+                                    parseDate={parseDate}
+                                    format='LL'
+                                    placeholder='Choose Date'
+                                    value={selectedDay}
+                                    onDayChange={this.onChangeDue}
+                                />
+                            </span>
 
-                        <span className='date-picker'>
-                            Due on &nbsp;
-                            <DayPickerInput
-                                formatDate={formatDate}
-                                parseDate={parseDate}
-                                format='LL'
-                                placeholder='Choose Date'
-                                value={selectedDay}
-                                onDayChange={this.onChangeDue}
+                            <span
+                                className='delete'
+                                aria-label='delete'
+                                onClick={() => this.onDelete(task._id)}
                             />
-                        </span>
 
-                        <span
-                            className='delete'
-                            aria-label='delete'
-                            onClick={() => this.onDelete(task._id)}
-                        />
-
-                        <TaskRescheduler task={task}>
-                            <RescheduleIcon className='reschedule' />
-                        </TaskRescheduler>
+                            <TaskRescheduler task={task}>
+                                <RescheduleIcon className='reschedule' />
+                            </TaskRescheduler>
+                        </article>
                     </li>
                 )}
             </Sortable>

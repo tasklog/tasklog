@@ -1,8 +1,9 @@
+import { dateTitle } from '/imports/utils/time'
+import { withRouter } from 'react-router'
+import Left from 'react-icons/lib/go/chevron-left'
+import moment from 'moment'
 import React from 'react'
 import Right from 'react-icons/lib/go/chevron-right'
-import Left from 'react-icons/lib/go/chevron-left'
-import { withRouter } from 'react-router'
-import moment from 'moment'
 
 class Arrow extends React.Component {
     get Icon() {
@@ -33,8 +34,14 @@ class Arrow extends React.Component {
         if (month) return 'month'
         if (year) return 'year'
     }
+    get nextDate() {
+        return this.date.clone().add(this.interval, this.period)
+    }
+    get nextLabel() {
+        return dateTitle(this.period, this.nextDate)
+    }
     get nextUrl() {
-        const date = this.date.clone().add(this.interval, this.period)
+        const date = this.nextDate
         switch (this.period) {
             case 'day':
                 return `/d/${date.year()}/${date.month() + 1}/${date.date()}`
@@ -51,9 +58,12 @@ class Arrow extends React.Component {
     }
     render() {
         return (
-            <button className='reset'>
+            <button
+                className='reset'
+                onClick={this.handleClick}
+                aria-label={this.nextLabel}
+            >
                 <this.Icon
-                    onClick={this.handleClick}
                     className={`arrow arrow--${this.props.direction}`}
                 />
             </button>
