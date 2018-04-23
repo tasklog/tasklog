@@ -19,8 +19,11 @@ Meteor.methods({
             secret: process.env.GOOGLE_SECRET
         })
     },
-    'seed.user'() {
+    'clear.user'() {
         Tasks.remove({ userId: Meteor.userId() })
+    },
+    'seed.user'() {
+        Meteor.call('clear.user')
 
         const date = moment().month(0).day(0)
         const endYear = date.year() + 2
