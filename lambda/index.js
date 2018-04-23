@@ -1,4 +1,4 @@
- 'use strict';
+'use strict';
  // --------------- Helpers that build all of the responses -----------------------
 
 function elicitSlot(sessionAttributes, intentName, slots, slotToElicit, message) {
@@ -184,11 +184,19 @@ function validateTask(slots){
     
     const https = require('https');
     
+    var postData = JSON.stringify({
+        'date' : slots.Date
+    });
+    
     var options = {
       hostname: 'tasklog.now.sh',
       port: 443,
       path: '/api/task/read',
-      method: 'GET'
+      method: 'POST',
+       headers: {
+           'Content-Type': 'application/json',
+           'Content-Length': postData.length
+         }
     };
     
     var req = https.request(options, (res) => {
@@ -211,6 +219,7 @@ function validateTask(slots){
       console.error(e);
     });
     
+    req.write(postData);
     req.end();
     
     delete sessionAttributes.currentTask;
@@ -253,8 +262,17 @@ exports.handler = (event, context, callback) => {
         process.env.TZ = 'America/New_York';
         // console.log(`event.bot.name=${event.bot.name}`);
 
+        /**
+         * Uncomment this if statement and populate with your Lex bot name, alias and / or version as
+         * a sanity check to prevent invoking this Lambda function from an undesired source.
+         */
+        /*
+        if (event.bot.name != 'BookTrip') {
+             callback('Invalid Bot Name');
+        }
+        */
         dispatch(event, (response) => loggingCallback(response, callback));
     } catch (err) {
         callback(err);
     }
-};   
+};            
