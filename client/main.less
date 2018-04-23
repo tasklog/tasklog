@@ -77,6 +77,22 @@ body {
     background: @light;
 }
 
+.hide-on-mobile {
+    @media only screen
+    and (max-device-width: 1024px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+        display: none;
+    }
+}
+
+.hide-on-desktop {
+    @media only screen
+    and (min-device-width: 1024px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+        display: none;
+    }
+}
+
 // layout styles
 
 .container {
@@ -85,44 +101,82 @@ body {
     height: 90vh;
 }
 
-.navigation,
+.nav-menu,
 .page {
     float: left;
     vertical-align: top;
 }
 
 .navigation {
-    height: 90vh;
-    width: calc(100% - @page-width);
-    position: fixed;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    .nav-menu {
+        height: 90vh;
+        width: calc(100% - @page-width);
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
 
-    ul {
-        list-style: none;
+        ul {
+            list-style: none;
 
-        li {
-            &:not(:last-child) {
-                margin-bottom: 10%;
-            }
-
-            &.profile {
-                margin-bottom: 15%;
-
-                img {
-                    width: 25%;
-                    height: 25%;
-                    border-radius: 50%;
+            li {
+                &:not(:last-child) {
+                    margin-bottom: 10%;
                 }
+
+                &.profile {
+                    margin-bottom: 15%;
+
+                    img {
+                        width: 25%;
+                        height: 25%;
+                        border-radius: 50%;
+
+                        @media only screen
+                        and (max-device-width: 1024px)
+                        and (-webkit-min-device-pixel-ratio: 1) {
+                            border: 3px solid @white;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media only screen
+        and (max-device-width: 1024px)
+        and (-webkit-min-device-pixel-ratio: 1) {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            background-color: @primary;
+            color: @white;
+            overflow-x: hidden;
+            transition: 0.5s;
+        }
+
+        &.active {
+            @media only screen
+            and (max-device-width: 1024px)
+            and (-webkit-min-device-pixel-ratio: 1) {
+                width: 75%;
+                padding: 5% 10%;
             }
         }
     }
 
-    @media only screen
-    and (max-device-width: 1024px)
-    and (-webkit-min-device-pixel-ratio: 1) {
-        width: 0%;
+    .open {
+        margin-bottom: 5%;
+        display: block;
+    }
+
+    .close {
+        position: absolute;
+        top: 0;
+        right: 5%;
+        font-size: 2rem;
     }
 }
 
@@ -140,6 +194,7 @@ body {
     and (max-device-width: 1024px)
     and (-webkit-min-device-pixel-ratio: 1) {
         width: 100%;
+        margin-left: 0;
     }
 }
 

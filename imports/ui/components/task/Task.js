@@ -87,7 +87,7 @@ class Task extends Component {
 
                             <div className='spacer' />
 
-                            <span className='date-picker'>
+                            <span className='date-picker hide-on-mobile'>
                                 Due on &nbsp;
                                 <DayPickerInput
                                     formatDate={formatDate}
