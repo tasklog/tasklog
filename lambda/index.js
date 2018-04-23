@@ -253,17 +253,8 @@ exports.handler = (event, context, callback) => {
         process.env.TZ = 'America/New_York';
         // console.log(`event.bot.name=${event.bot.name}`);
 
-        /**
-         * Uncomment this if statement and populate with your Lex bot name, alias and / or version as
-         * a sanity check to prevent invoking this Lambda function from an undesired source.
-         */
-        /*
-        if (event.bot.name != 'BookTrip') {
-             callback('Invalid Bot Name');
-        }
-        */
         dispatch(event, (response) => loggingCallback(response, callback));
     } catch (err) {
         callback(err);
     }
-};                                  
+};   
