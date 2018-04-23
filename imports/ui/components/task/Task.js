@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import { Meteor } from 'meteor/meteor'
-
-import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 import { formatDate, parseDate } from 'react-day-picker/moment'
-
-import Title from '/imports/ui/components/page/Title'
-import Sortable from '/imports/ui/components/task/Sortable'
+import { Meteor } from 'meteor/meteor'
 import { notifier } from '/imports/utils/notifications'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import React, { Component } from 'react'
+import Sortable from '/imports/ui/components/task/Sortable'
+import Title from '/imports/ui/components/page/Title'
+import TaskRescheduler from './TaskRescheduler'
 
 class Task extends Component {
     state = {
@@ -93,6 +92,10 @@ class Task extends Component {
                             />
                             <span className='delete' aria-label='delete' onClick={() => this.onDelete(task._id)} />
                         </span>
+
+                        <TaskRescheduler task={task}>
+                            <span>R</span>
+                        </TaskRescheduler>
                     </li>
                 )}
             </Sortable>

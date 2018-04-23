@@ -45,12 +45,12 @@ Meteor.methods({
         })
     },
     'task.setStatus'(_id, status) {
-        Tasks.update({ _id }, {
+        Tasks.update({ _id, userId: Meteor.userId() }, {
             $set: { status }
         })
     },
     'task.complete'(_id) {
-        Tasks.update({ _id }, {
+        Tasks.update({ _id, userId: Meteor.userId() }, {
             $set: {
                 completed: new Date(),
                 status: 'COMPLETE'
@@ -58,7 +58,7 @@ Meteor.methods({
         })
     },
     'task.incomplete'(_id) {
-        Tasks.update({ _id }, {
+        Tasks.update({ _id, userId: Meteor.userId() }, {
             $set: {
                 completed: null,
                 status: 'INCOMPLETE'
@@ -73,12 +73,16 @@ Meteor.methods({
         }
     },
     'task.reschedule'(_id, scheduled) {
-        Tasks.update({ _id }, {
-            $set: { scheduled }
+        Tasks.update({ _id, userId: Meteor.userId() }, {
+            $set: { scheduled, order: -1 }
         })
+        const { day, week, month, year } = scheduled || {}
+        const query = buildScheduledQuery(scheduled)
+        query.userId = Meteor.userId()
+        Tasks.update(query, { $inc: { order: 1 } }, { multi: true })
     },
     'task.changeDue'(_id, due) {
-        Tasks.update({ _id }, {
+        Tasks.update({ _id, userId: Meteor.userId() }, {
             $set: { due }
         })
     }
