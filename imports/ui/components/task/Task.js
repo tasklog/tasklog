@@ -7,6 +7,7 @@ import { formatDate, parseDate } from 'react-day-picker/moment'
 
 import Title from '/imports/ui/components/page/Title'
 import Sortable from '/imports/ui/components/task/Sortable'
+import { notifier } from '/imports/utils/notifications'
 
 class Task extends Component {
     state = {
@@ -31,7 +32,9 @@ class Task extends Component {
     }
 
     onDelete = (id) => {
-        Meteor.call('task.delete', id)
+        notifier.confirm('Are you sure you want to delete this task?', () => {
+            Meteor.call('task.delete', id)
+        })
     }
 
     onTextChange = (event) => {
