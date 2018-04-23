@@ -14,10 +14,10 @@ class TaskRescheduler extends Component {
         return this.props.location.pathname.includes('/d/')
             || this.props.location.pathname.includes('/w/')
     }
-    get skipMonthly() {
+    get skipWeekly() {
         return this.props.location.pathname.includes('/m/')
     }
-    get skipYearly() {
+    get skipMonthly() {
         return this.props.location.pathname.includes('/y/')
     }
     onVisibleChange = (open) => {
@@ -39,8 +39,8 @@ class TaskRescheduler extends Component {
                 overlay={(
                     <Menu onSelect={this.onSelect}>
                         {this.skipDaily || <Item key='day'>Move to Daily Log</Item>}
-                        {this.skipMonthly || <Item key='week'>Move to Monthly Log</Item>}
-                        {this.skipYearly || <Item key='month'>Move to Yearly Log</Item>}
+                        {this.skipWeekly || <Item key='week'>Move to Weekly Log</Item>}
+                        {this.skipMonthly || <Item key='month'>Move to Monthly Log</Item>}
                     </Menu>
                 )}
             />
