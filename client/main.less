@@ -271,17 +271,29 @@ body {
     }
 
     .task {
-        .right {
-            float: right;
+        display: flex;
+        align-items: center;
+
+        .spacer {
+            flex: 1;
         }
 
+        .date-picker {
+            align-self: center;
+        }
+
+        .reschedule,
         .delete {
             margin-left: 15px;
             cursor: pointer;
+        }
 
-            &::before {
-                content: '×';
-            }
+        .reschedule {
+            margin-top: 2px;
+        }
+
+        .delete::before {
+            content: '×';
         }
 
         input[type='text'] {

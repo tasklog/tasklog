@@ -4,9 +4,10 @@ import { Meteor } from 'meteor/meteor'
 import { notifier } from '/imports/utils/notifications'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import React, { Component } from 'react'
+import RescheduleIcon from 'react-icons/lib/fa/ellipsis-h'
 import Sortable from '/imports/ui/components/task/Sortable'
-import Title from '/imports/ui/components/page/Title'
 import TaskRescheduler from './TaskRescheduler'
+import Title from '/imports/ui/components/page/Title'
 
 class Task extends Component {
     state = {
@@ -80,7 +81,9 @@ class Task extends Component {
                             onKeyPress={this.onKeyPress}
                         />
 
-                        <span className='right'>
+                        <div className='spacer' />
+
+                        <span className='date-picker'>
                             Due on &nbsp;
                             <DayPickerInput
                                 formatDate={formatDate}
@@ -90,11 +93,16 @@ class Task extends Component {
                                 value={selectedDay}
                                 onDayChange={this.onChangeDue}
                             />
-                            <span className='delete' aria-label='delete' onClick={() => this.onDelete(task._id)} />
                         </span>
 
+                        <span
+                            className='delete'
+                            aria-label='delete'
+                            onClick={() => this.onDelete(task._id)}
+                        />
+
                         <TaskRescheduler task={task}>
-                            <span>R</span>
+                            <RescheduleIcon className='reschedule' />
                         </TaskRescheduler>
                     </li>
                 )}
