@@ -2,6 +2,7 @@ import { createScheduledTimestamp } from '/imports/utils/time'
 import { findLastActiveUser } from '/imports/utils/users'
 import { router } from '/server/router'
 import { Tasks } from '/imports/api/tasks/tasks'
+import { decode } from 'base-64'
 import listify from 'listify'
 import moment from 'moment'
 
@@ -28,7 +29,7 @@ router.post('/task/read', async (req, res) => {
             'scheduled.month': date.month() + 1,
             'scheduled.year': date.year()
         }
-        const tasks = Tasks.find(query).fetch().map(task => task.text)
+        const tasks = Tasks.find(query).fetch().map(task => decode(task.text))
         res.send(JSON.stringify({
             text: listify(tasks)
         }))
