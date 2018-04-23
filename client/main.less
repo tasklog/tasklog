@@ -81,15 +81,14 @@ body {
     @media only screen
     and (max-device-width: 1024px)
     and (-webkit-min-device-pixel-ratio: 1) {
-        display: none;
+        display: none !important;
     }
 }
 
 .hide-on-desktop {
     @media only screen
-    and (min-device-width: 1024px)
-    and (-webkit-min-device-pixel-ratio: 1) {
-        display: none;
+    and (min-device-width: 1024px) {
+        display: none !important;
     }
 }
 
