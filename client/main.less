@@ -131,6 +131,85 @@ body {
     }
 }
 
+.login {
+    display: flex;
+    justify-content: center;
+    padding-top: 5vw;
+    &__content {
+        padding: 2rem;
+        width: 25rem;
+        max-width: 95%;
+        background: @white;
+        box-shadow: 0 0 0.25rem 0 rgba(0,0,0,0.25);
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        &__logo {
+            @size: 7.5rem;
+            width: @size;
+            height: @size;
+            margin: auto;
+            margin-bottom: 2rem;
+            background: rgba(0,0,0,0.25);
+        }
+        &__with-google {
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background: #ce4331;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            :first-child {
+                margin-right: 0.5rem;
+                font-size: 1.25em;
+            }
+        }
+        &__login {
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            color: white;
+            background: @primary;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        &__input {
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            &::placeholder {
+                color: #ccc;
+            }
+        }
+        &__or {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+            &::after {
+                @size: 2.5rem;
+                content: 'OR';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: @size;
+                height: @size;
+                background: #ddd;
+                color: #555;
+                border-radius: 100%;
+                opacity: 0.5;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
 // other styles
 
 .title {
