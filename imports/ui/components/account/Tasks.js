@@ -10,10 +10,10 @@ const Tasks = props => {
 }
 
 Tasks.propTypes = {
-    day: PropTypes.string,
-    month: PropTypes.string,
-    year: PropTypes.string,
-    week: PropTypes.string
+    day: PropTypes.any,
+    month: PropTypes.any,
+    year: PropTypes.any,
+    week: PropTypes.any
 }
 
 export default withTracker(props => {

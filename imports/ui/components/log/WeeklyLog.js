@@ -9,9 +9,18 @@ import Task from '/imports/ui/components/task/Task'
 import Tasks from '/imports/ui/components/account/Tasks'
 
 class WeeklyLog extends Component {
-    get title() {
+    get date() {
         const { year, week } = this.props.match.params
-        return dateTitle('week', moment().day('Sunday').year(year).week(week))
+        return moment().day('Sunday').year(year).week(week).clone()
+    }
+
+    get title() {
+        return dateTitle('week', this.date)
+    }
+
+    getParamsForDay(i) {
+        const date = this.date.add(i, 'day')
+        return { day: date.date(), month: date.month() + 1 }
     }
 
     render() {
@@ -19,12 +28,17 @@ class WeeklyLog extends Component {
             <div>
                 <Arrows title={this.title} />
                 <ul className='log'>
-                    <AddTask period='week' {...this.props.match.params} />
-                    <Tasks {...this.props.match.params}>
-                        {tasks => tasks.map(task => (
-                            <Task key={task._id} task={task} tasks={tasks} />
-                        ))}
-                    </Tasks>
+                    {moment.weekdays().map((day, i) => (
+                        <div key={day}>
+                            <p>{day}</p>
+                            <AddTask period='day' {...this.props.match.params} {...this.getParamsForDay(i)} />
+                            <Tasks {...this.props.match.params} {...this.getParamsForDay(i)}>
+                                {tasks => tasks.map(task => (
+                                    <Task key={task._id} task={task} tasks={tasks} />
+                                ))}
+                            </Tasks>
+                        </div>
+                    ))}
                 </ul>
             </div>
         )
