@@ -19,7 +19,7 @@ class Graph extends Component {
     draw() {
         this.element.current.innerHTML = ''
         const { width, height } = this.element.current.getBoundingClientRect()
-        graph(this.element.current, this.props.data, width, height)
+        graph(this.props.data, this.element.current, width, height)
     }
 
     render() {
