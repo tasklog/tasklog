@@ -40,11 +40,11 @@ Tasks.schema = new SimpleSchema({
                 type: SimpleSchema.Integer,
                 min: 1,
                 max: 12,
-                required: true
+                required: false
             },
             year: {
                 type: SimpleSchema.Integer,
-                required: true
+                required: false
             }
         }),
     }

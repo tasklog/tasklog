@@ -16,11 +16,14 @@ class AddTask extends Component {
 
         switch (period) {
             case 'month':
-                m.year(year).month(month)
+                m.year(year).month(month - 1)
+                break
             case 'week':
-                m.day('Sunday').month(month)
+                m.day('Sunday').year(year).week(week)
+                break
             case 'day':
-                m.date(day)
+                m.year(year).month(month - 1).date(day)
+                break
         }
 
         Meteor.call('task.create', text, createScheduledTimestamp(period, m))

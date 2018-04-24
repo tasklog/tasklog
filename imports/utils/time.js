@@ -6,12 +6,17 @@ export const createScheduledTimestamp = (period, date) => {
     switch (period) {
         case 'day':
             timestamp.day = m.date()
-        case 'week':
-            timestamp.week = m.week()
-        case 'month':
-            timestamp.week = m.week()
             timestamp.month = m.month() + 1
             timestamp.year = m.year()
+            break
+        case 'week':
+            timestamp.week = m.week()
+            timestamp.year = m.year()
+            break
+        case 'month':
+            timestamp.month = m.month() + 1
+            timestamp.year = m.year()
+            break
     }
     return timestamp
 }
@@ -26,28 +31,35 @@ export const dateTitle = (period, date) => {
     }
 }
 
-export const buildScheduledQuery = ({ day, week, month, year } = {}) => {
+export const periodFromTimestamp = ({ day, week, month, year }) => {
+    if (day && month && year) return 'day'
+    if (week && year) return 'week'
+    if (month && year) return 'month'
+}
+
+export const buildScheduledQuery = (timestamp = {}) => {
+    const { day, week, month, year } = timestamp
     const query = {}
-    if (day) {
-        query['scheduled.day'] = day
-        query['scheduled.month'] = month
-        query['scheduled.year'] = year
-    } else if (week) {
-        query['scheduled.day'] = { $type: 'double' }
-        query['scheduled.week'] = week
-        query['scheduled.year'] = year
-    } else if (month) {
-        const baseMoment = moment().year(year).month(month - 1)
-        const firstMoment = baseMoment.clone().date(0)
-        const lastMoment = baseMoment.clone().date(baseMoment.daysInMonth())
-        query['scheduled.day'] = null
-        query['scheduled.week'] = { $gte: firstMoment.week(), $lte: lastMoment.week() }
-        query['scheduled.month'] = { $type: 'double' }
-        query['scheduled.year'] = year
-    } else if (year) {
-        query['scheduled.week'] = null
-        query['scheduled.month'] = { $type: 'double' }
-        query['scheduled.year'] = year
+
+    switch (periodFromTimestamp(timestamp)) {
+        case 'day':
+            query['scheduled.day'] = day
+            query['scheduled.month'] = month
+            query['scheduled.year'] = year
+            break
+        case 'week':
+            query['scheduled.day'] = null
+            query['scheduled.week'] = week
+            query['scheduled.month'] = null
+            query['scheduled.year'] = year
+            break
+        case 'month':
+            query['scheduled.day'] = null
+            query['scheduled.week'] = null
+            query['scheduled.month'] = month
+            query['scheduled.year'] = year
+            break
     }
+
     return query
 }
