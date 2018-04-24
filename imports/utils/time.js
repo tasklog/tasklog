@@ -25,7 +25,7 @@ export const dateTitle = (period, date) => {
     date = moment(date)
     switch (period) {
         case 'day': return date.format('MMMM D, YYYY')
-        case 'week': return `Week of ${date.format('MMMM D, YYYY')}`
+        case 'week': return `Week of ${date.day('Sunday').format('MMMM D, YYYY')}`
         case 'month': return date.format('MMMM YYYY')
         case 'year': return date.year()
     }
