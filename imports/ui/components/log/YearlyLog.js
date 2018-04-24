@@ -17,7 +17,7 @@ class YearlyLog extends Component {
                         <div key={number}>
                             <p>{name}</p>
                             <AddTask period='month' {...this.props.match.params} month={number.toString()} />
-                            <Tasks {...this.props.match.params} month={number.toString()}>
+                            <Tasks {...this.props.match.params} month={(number + 1).toString()}>
                                 {tasks => tasks.map(task => (
                                     <Task key={task._id} task={task} tasks={tasks} />
                                 ))}

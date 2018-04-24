@@ -9,6 +9,7 @@ export const createScheduledTimestamp = (period, date) => {
         case 'week':
             timestamp.week = m.week()
         case 'month':
+            timestamp.week = m.week()
             timestamp.month = m.month() + 1
             timestamp.year = m.year()
     }
