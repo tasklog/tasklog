@@ -1,5 +1,5 @@
 import { dateTitle } from '/imports/utils/time'
-import { importGoogleCalendar } from '/imports/utils/gcal'
+import { GoogleApi } from 'meteor/percolate:google-api'
 import { Meteor } from 'meteor/meteor'
 import AddTask from '/imports/ui/components/task/AddTask'
 import Arrows from '/imports/ui/components/page/Arrows'
@@ -30,17 +30,15 @@ class DailyLog extends Component {
     getEvents = async () => {
         this.setState({ calendarEvents: [] })
 
-        const cal = await importGoogleCalendar()
         const thisDay = this.state.date
         const nextDay = thisDay.clone().add(1, 'days')
 
-        const res = await cal.events.list({
-            calendarId: 'primary',
-            timeMin: thisDay.format('YYYY-MM-DDTHH:mm:ssZ'),
-            timeMax: nextDay.format('YYYY-MM-DDTHH:mm:ssZ')
+        const { items: calendarEvents } = await GoogleApi.get('calendar/v3/calendars/primary/events', {
+            params: {
+                timeMin: thisDay.format('YYYY-MM-DDTHH:mm:ssZ'),
+                timeMax: nextDay.format('YYYY-MM-DDTHH:mm:ssZ')
+            }
         })
-
-        const calendarEvents = res.result.items
 
         this.setState({ calendarEvents })
     }
