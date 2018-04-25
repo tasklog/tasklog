@@ -5,10 +5,19 @@ import { Meteor } from 'meteor/meteor'
 import { notifier } from '/imports/utils/notifications'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import React, { Component } from 'react'
-import RescheduleIcon from 'react-icons/lib/fa/ellipsis-h'
+import RescheduleIcon from 'react-icons/lib/io/android-exit'
+import DeleteIcon from 'react-icons/lib/io/android-cancel'
+import DueDateIcon from 'react-icons/lib/io/android-calendar'
+import CheckIcon from 'react-icons/lib/io/checkmark'
 import Sortable from '/imports/ui/components/task/Sortable'
 import TaskRescheduler from './TaskRescheduler'
 import Title from '/imports/ui/components/page/Title'
+
+const IconButton = ({ icon: Icon, label, onClick, className }) => (
+    <button className={`icon-button ${className}`} onClick={onClick} aria-label={label}>
+        <Icon />
+    </button>
+)
 
 class Task extends Component {
     state = {
@@ -21,6 +30,10 @@ class Task extends Component {
             task: props.task,
             selectedDay: props.task.due !== null ? props.task.due : undefined
         }
+    }
+
+    get isComplete() {
+        return this.state.task.status === 'COMPLETE'
     }
 
     onComplete = () => {
@@ -65,8 +78,15 @@ class Task extends Component {
             >
                 {opacity => (
                     <li className='task' style={{ opacity }}>
-                        <section aria-label={decode(task.text || '')}>
-                            <div className='round'>
+                        <section aria-label={decode(task.text || '')} onKeyDown={e => console.log(e.key)}>
+                            <IconButton
+                                icon={CheckIcon}
+                                className={this.isComplete ? 'complete' : 'incomplete'}
+                                label={this.isComplete ? 'mark task as complete' : 'mark task as incomplete'}
+                                onClick={this.onComplete}
+                            />
+
+                            {/* <div className='round'>
                                 <input
                                     tabIndex='0'
                                     id={`checkbox-${task._id}`}
@@ -75,7 +95,7 @@ class Task extends Component {
                                     onChange={this.onComplete}
                                 />
                                 <label htmlFor={`checkbox-${task._id}`}></label>
-                            </div>
+                            </div> */}
 
                             <input
                                 type='text'
@@ -85,7 +105,7 @@ class Task extends Component {
                                 onKeyPress={this.onKeyPress}
                             />
 
-                            <span className='date-picker hide-on-mobile'>
+                            {/* <span className='date-picker hide-on-mobile'>
                                 Due on &nbsp;
                                 <DayPickerInput
                                     formatDate={formatDate}
@@ -95,17 +115,26 @@ class Task extends Component {
                                     value={selectedDay}
                                     onDayChange={this.onChangeDue}
                                 />
-                            </span>
+                            </span> */}
 
-                            <span
-                                className='delete'
-                                aria-label='delete'
-                                onClick={() => this.onDelete(task._id)}
+                            <IconButton
+                                icon={DueDateIcon}
+                                label='select a due date'
                             />
 
                             <TaskRescheduler task={task}>
-                                <RescheduleIcon className='reschedule' />
+                                <IconButton
+                                    icon={RescheduleIcon}
+                                    label='reschedule'
+                                />
                             </TaskRescheduler>
+
+                            <IconButton
+                                icon={DeleteIcon}
+                                label='delete'
+                                onClick={() => this.onDelete(task._id)}
+                            />
+
                         </section>
                     </li>
                 )}

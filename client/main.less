@@ -302,6 +302,13 @@ body {
     align-items: center;
 }
 
+.icon-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: 0;
+}
+
 .log {
     list-style: none;
 
@@ -329,8 +336,12 @@ body {
             outline: 0;
         }
 
-        .spacer {
-            flex: 1;
+        .incomplete {
+            color: @grey;
+        }
+
+        .complete {
+            color: @success;
         }
 
         .date-picker {
@@ -338,19 +349,22 @@ body {
             margin-left: 1rem;
         }
 
-        .reschedule,
-        .delete {
-            margin-left: 15px;
+        .icon-button {
+            @size: 1.5rem;
+            align-items: center;
             cursor: pointer;
+            display: flex;
+            height: @size;
+            justify-content: center;
+            margin: 0 0.1rem;
+            width: @size;
+            svg {
+                cursor: pointer;
+                height: 75%;
+                width: 75%;
+            }
         }
 
-        .reschedule {
-            margin-top: 2px;
-        }
-
-        .delete::before {
-            content: '×';
-        }
 
         input[type='text'] {
             flex: 1;
@@ -405,41 +419,3 @@ body {
     font-weight: 400;
 }
 
-.round {
-  position: relative;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 15px;
-
-    label {
-        cursor: pointer;
-        position: absolute;
-        border-radius: 50%;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-
-        &:after {
-            border: 2px solid @grey;
-            border-top: none;
-            border-right: none;
-            content: "";
-            position: absolute;
-            top: 30%;
-            left: 20%;
-            transform: rotate(-45deg);
-            width: 50%;
-            height: 20%;
-        }
-    }
-
-    input[type="checkbox"] {
-        visibility: hidden;
-
-        &:checked + label:after {
-            border-color: @success;
-        }
-    }
-}
