@@ -1,13 +1,11 @@
 import { Meteor } from 'meteor/meteor'
 
-const GOOGLE_PERMISSIONS = [
-    'https://www.googleapis.com/auth/calendar.readonly'
-]
-
 export function loginWithGoogle() {
     return new Promise((resolve, reject) => {
         Meteor.loginWithGoogle({
-            requestPermissions: GOOGLE_PERMISSIONS,
+            requestPermissions: [
+                'https://www.googleapis.com/auth/calendar.readonly'
+            ],
             requestOfflineToken: true,
             forceApprovalPrompt: true
         }, (error) => {
