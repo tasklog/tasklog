@@ -6,10 +6,13 @@ const GOOGLE_PERMISSIONS = [
 
 export function loginWithGoogle() {
     return new Promise((resolve, reject) => {
-        Meteor.loginWithGoogle(
-            { requestPermissions: GOOGLE_PERMISSIONS },
-            error => error ? reject(error) : resolve()
-        )
+        Meteor.loginWithGoogle({
+            requestPermissions: GOOGLE_PERMISSIONS,
+            requestOfflineToken: true,
+            forceApprovalPrompt: true
+        }, (error) => {
+            error ? reject(error) : resolve()
+        })
     })
 }
 
