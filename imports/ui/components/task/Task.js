@@ -65,7 +65,7 @@ class Task extends Component {
             >
                 {opacity => (
                     <li className='task' style={{ opacity }}>
-                        <article tabIndex='0' aria-label={decode(task.text || '')}>
+                        <section aria-label={decode(task.text || '')}>
                             <div className='round'>
                                 <input
                                     tabIndex='0'
@@ -106,7 +106,7 @@ class Task extends Component {
                             <TaskRescheduler task={task}>
                                 <RescheduleIcon className='reschedule' />
                             </TaskRescheduler>
-                        </article>
+                        </section>
                     </li>
                 )}
             </Sortable>
