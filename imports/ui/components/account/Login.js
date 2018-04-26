@@ -1,10 +1,12 @@
-import React from 'react'
-import GoogleButton from 'react-google-button'
 import { loginWithGoogle } from '/imports/utils/auth'
+import { BrowserRouter, Redirect } from 'react-router-dom'
+import GoogleButton from 'react-google-button'
 import GoogleIcon from 'react-icons/lib/fa/google'
+import React from 'react'
 
 const Login = () => (
     <div className='login'>
+        <Redirect to='/' />
         <div className='login__content'>
             <img src='/img/logo_dark.svg' alt='Tasklog Logo' className='login__content__logo' />
             <button className='login__content__with-google' onClick={loginWithGoogle}>

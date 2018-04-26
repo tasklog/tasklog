@@ -20,9 +20,9 @@ import YearlyLog from '/imports/ui/components/log/YearlyLog'
 class App extends Component {
     render() {
         return (
-            <Auth login={Login}>
-                {() => (
-                    <Router>
+            <Router>
+                <Auth login={Login}>
+                    {() => (
                         <Container>
                             <Navigation />
                             <Page>
@@ -36,9 +36,9 @@ class App extends Component {
                                 </Switch>
                             </Page>
                         </Container>
-                    </Router>
-                )}
-            </Auth>
+                    )}
+                </Auth>
+            </Router>
         )
     }
 }
