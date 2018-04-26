@@ -3,12 +3,12 @@ import { decode } from 'base-64'
 import { formatDate, parseDate } from 'react-day-picker/moment'
 import { Meteor } from 'meteor/meteor'
 import { notifier } from '/imports/utils/notifications'
+import CheckIcon from 'react-icons/lib/io/checkmark'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
-import React, { Component } from 'react'
-import RescheduleIcon from 'react-icons/lib/io/android-exit'
 import DeleteIcon from 'react-icons/lib/io/android-cancel'
 import DueDateIcon from 'react-icons/lib/io/android-calendar'
-import CheckIcon from 'react-icons/lib/io/checkmark'
+import React, { Component } from 'react'
+import RescheduleIcon from 'react-icons/lib/io/android-exit'
 import Sortable from '/imports/ui/components/task/Sortable'
 import TaskRescheduler from './TaskRescheduler'
 import Title from '/imports/ui/components/page/Title'
@@ -20,29 +20,23 @@ const IconButton = ({ icon: Icon, label, onClick, className }) => (
 )
 
 class Task extends Component {
-    state = {
-        task: {},
-        selectedDay: undefined
-    }
+    liRef = null
 
-    static getDerivedStateFromProps(props) {
-        return {
-            task: props.task,
-            selectedDay: props.task.due !== null ? props.task.due : undefined
-        }
+    state = {
+        pickerOpen: false
     }
 
     get isComplete() {
-        return this.state.task.status === 'COMPLETE'
+        return this.props.task.status === 'COMPLETE'
     }
 
     onComplete = () => {
-        Meteor.call('task.toggle', this.state.task._id)
+        Meteor.call('task.toggle', this.props.task._id)
     }
 
     onChangeDue = (day) => {
-        Meteor.call('task.changeDue', this.state.task._id, day)
-        this.setState({ selectedDay: day })
+        console.log('change')
+        Meteor.call('task.changeDue', this.props.task._id, day)
     }
 
     onDelete = (id) => {
@@ -53,7 +47,7 @@ class Task extends Component {
     }
 
     onTextChange = (event) => {
-        Meteor.call('task.setText', this.state.task._id, event.target.value)
+        Meteor.call('task.setText', this.props.task._id, event.target.value)
     }
 
     onKeyPress = (event) => {
@@ -67,35 +61,29 @@ class Task extends Component {
         Meteor.call('task.reorder', tasks[dragIndex]._id, tasks[hoverIndex]._id)
     }
 
-    render() {
-        const { task, selectedDay } = this.state
+    togglePicker = (event) => {
+        event.stopPropagation();
+        this.setState(state => ({ pickerOpen: !state.pickerOpen }), () => {
+            if (this.state.pickerOpen) {
+                this.liRef.querySelector('.DayPickerInput input').focus()
+            }
+        })
+    }
 
+    render() {
+        const { task } = this.props
         return (
-            <Sortable
-                index={this.props.task.order}
-                id={this.props.task._id}
-                reorder={this.reorder}
-            >
+            <Sortable index={this.props.task.order} id={this.props.task._id} reorder={this.reorder}>
                 {opacity => (
-                    <li className='task' style={{ opacity }}>
+                    <li className='task' style={{ opacity }} ref={ref => this.liRef = ref}>
                         <section aria-label={decode(task.text || '')} onKeyDown={e => console.log(e.key)}>
+
                             <IconButton
                                 icon={CheckIcon}
                                 className={this.isComplete ? 'complete' : 'incomplete'}
                                 label={this.isComplete ? 'mark task as complete' : 'mark task as incomplete'}
                                 onClick={this.onComplete}
                             />
-
-                            {/* <div className='round'>
-                                <input
-                                    tabIndex='0'
-                                    id={`checkbox-${task._id}`}
-                                    type='checkbox'
-                                    checked={task.status === 'COMPLETE'}
-                                    onChange={this.onComplete}
-                                />
-                                <label htmlFor={`checkbox-${task._id}`}></label>
-                            </div> */}
 
                             <input
                                 type='text'
@@ -105,22 +93,26 @@ class Task extends Component {
                                 onKeyPress={this.onKeyPress}
                             />
 
-                            {/* <span className='date-picker hide-on-mobile'>
-                                Due on &nbsp;
-                                <DayPickerInput
-                                    formatDate={formatDate}
-                                    parseDate={parseDate}
-                                    format='LL'
-                                    placeholder='Choose Date'
-                                    value={selectedDay}
-                                    onDayChange={this.onChangeDue}
+                            {(task.due || this.state.pickerOpen) ? (
+                                <span className='date-picker hide-on-mobile'>
+                                    Due on &nbsp;
+                                    <DayPickerInput
+                                        formatDate={formatDate}
+                                        parseDate={parseDate}
+                                        format='LL'
+                                        placeholder='Choose Date'
+                                        value={task.due || undefined}
+                                        onDayChange={this.onChangeDue}
+                                    />
+                                </span>
+                            ) : (
+                                <IconButton
+                                    className='hide-on-mobile'
+                                    icon={DueDateIcon}
+                                    label='select a due date'
+                                    onClick={this.togglePicker}
                                 />
-                            </span> */}
-
-                            <IconButton
-                                icon={DueDateIcon}
-                                label='select a due date'
-                            />
+                            )}
 
                             <TaskRescheduler task={task}>
                                 <IconButton
