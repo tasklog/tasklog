@@ -2,8 +2,6 @@
   <img alt="tasklog logo" src="public/img/logo_dark.svg" width="250px">  
 </p>
 
-<br>
-
 ## Dependencies
 
 - [Meteor](https://www.meteor.com/)
