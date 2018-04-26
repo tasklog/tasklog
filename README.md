@@ -1,5 +1,7 @@
 <p align="center">
-  <img alt="tasklog logo" src="public/img/logo_dark.svg" width="250px">  
+  <a href="https://tasklog.now.sh">
+    <img alt="tasklog logo" src="public/img/logo_dark.svg" width="250px">      
+  </a>
 </p>
 
 ## Dependencies
