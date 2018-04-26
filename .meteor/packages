@@ -27,3 +27,4 @@ seba:method-hooks
 service-configuration
 webapp
 percolate:google-api
+http

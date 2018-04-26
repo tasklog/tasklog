@@ -35,7 +35,6 @@ class Task extends Component {
     }
 
     onChangeDue = (day) => {
-        console.log('change')
         Meteor.call('task.changeDue', this.props.task._id, day)
     }
 

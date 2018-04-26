@@ -1,6 +1,9 @@
+import { HTTP } from 'meteor/http'
 import { Meteor } from 'meteor/meteor'
 import { resolve } from 'path'
 import dotenv from 'dotenv'
+
+Meteor.http = HTTP
 
 dotenv.config({ path: resolve(Meteor.absolutePath, '.env') })
 
