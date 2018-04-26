@@ -34,9 +34,14 @@ export default withTracker(() => {
     const data = []
 
     const date = moment()
-    const yearFromNow = date.clone().add(1, 'year')
 
-    while (date < yearFromNow) {
+    const total = 371
+    const daysFromEnd = 6 - date.day()
+    const numberDays = total - daysFromEnd
+
+    date.subtract(numberDays, 'days')
+
+    for (let i = 0; i < numberDays; i++) {
         data.push({
             date: date.format('YYYY-MM-DD'),
             count: Math.max(0, gen.intBetween(-3, 10))
