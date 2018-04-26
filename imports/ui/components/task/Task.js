@@ -60,6 +60,18 @@ class Task extends Component {
         Meteor.call('task.reorder', tasks[dragIndex]._id, tasks[hoverIndex]._id)
     }
 
+    reorderOnArrow = ({ key }) => {
+        const { task, tasks } = this.props
+
+        if (key === 'ArrowUp' && !!tasks[task.order - 1]) {
+            Meteor.call('task.reorder', tasks[task.order - 1]._id, task._id)
+        }
+
+        if (key === 'ArrowDown' && !!tasks[task.order + 1]) {
+            Meteor.call('task.reorder', task._id, tasks[task.order + 1]._id)
+        }
+    }
+
     togglePicker = (event) => {
         event.stopPropagation();
         this.setState(state => ({ pickerOpen: !state.pickerOpen }), () => {
@@ -75,7 +87,7 @@ class Task extends Component {
             <Sortable index={this.props.task.order} id={this.props.task._id} reorder={this.reorder}>
                 {opacity => (
                     <li className='task' style={{ opacity }} ref={ref => this.liRef = ref}>
-                        <section aria-label={decode(task.text || '')} onKeyDown={e => console.log(e.key)}>
+                        <section aria-label={decode(task.text || '')} onKeyDown={this.reorderOnArrow}>
 
                             <IconButton
                                 icon={CheckIcon}
