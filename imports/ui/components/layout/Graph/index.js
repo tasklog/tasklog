@@ -30,6 +30,7 @@ class Graph extends Component {
 }
 
 export default withTracker(() => {
+    console.time('tracker')
     const gen = random('⚛︎')
     const data = []
 
