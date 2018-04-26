@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "postinstall": "svgexport public/img/brandmark_accent.svg public/build/favicon.png 256:"
+    "build": "svgexport public/img/brandmark_accent.svg public/build/favicon.png 256:256"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
