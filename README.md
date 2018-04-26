@@ -1,4 +1,7 @@
-<img alt="Tasklog Logo" src="public/img/logo_dark.svg" width="250px">
+<p align="center">
+  <img alt="Tasklog Logo" src="public/img/logo_dark.svg" width="250px">  
+</p>
+
 
 ## Dependencies
 
