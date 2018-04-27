@@ -1,9 +1,10 @@
 import { dateTitle } from '/imports/utils/time'
 import { withRouter } from 'react-router'
-import Left from 'react-icons/lib/go/chevron-left'
+import Left from 'react-icons/lib/fa/angle-left'
 import moment from 'moment'
 import React from 'react'
-import Right from 'react-icons/lib/go/chevron-right'
+import Right from 'react-icons/lib/fa/angle-right'
+
 
 class Arrow extends React.Component {
     get Icon() {
