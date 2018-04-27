@@ -54,7 +54,7 @@ export default function (stats, element, width, height) {
                     .style('font-size', '13px')
                     .text(moment(stat.date).format('MMM'))
                     .attr('fill', 'rgba(0,0,0,0.33)')
-                    .attr('x', d3.select(this).attr('x'))
+                    .attr('x', +d3.select(this).attr('x') + size / 2)
                     .attr('y', 10)
             }
         })
