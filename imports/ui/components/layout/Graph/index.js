@@ -30,11 +30,10 @@ class Graph extends Component {
 }
 
 export default withTracker(() => {
-    console.time('tracker')
-    const gen = random('⚛︎')
-    const data = []
+    Meteor.subscribe('tasks')
 
     const date = moment()
+    const data = []
 
     const total = 371
     const daysFromEnd = 6 - date.day()
@@ -43,10 +42,13 @@ export default withTracker(() => {
     date.subtract(numberDays, 'days')
 
     for (let i = 0; i < numberDays; i++) {
-        data.push({
-            date: date.format('YYYY-MM-DD'),
-            count: Math.max(0, gen.intBetween(-3, 10))
-        })
+        const count = Tasks.find({
+            completed: {
+                $gte: date.clone().hour(0).minute(0).second(0).toDate(),
+                $lt: date.clone().add(1, 'day').hour(0).minute(0).second(0).toDate()
+            }
+        }).count()
+        data.push({ date: date.format('YYYY-MM-DD'), count })
         date.add(1, 'day')
     }
 

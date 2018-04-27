@@ -17,7 +17,7 @@ export default function (stats, element, width, height) {
     const margin = size * 0.2
     const visibleSize = size - margin
 
-    const maxCount = stats.reduce((max, stat) => Math.max(max, stat.count), 0)
+    const maxCount = stats.reduce((max, stat) => Math.max(max, stat.count), 0) || 1
 
     stats.forEach((stat) => {
         stat.color = interoplateAccent(stat.count / maxCount)
