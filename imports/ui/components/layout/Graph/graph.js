@@ -23,7 +23,10 @@ export default function (stats, element, width, height) {
         stat.color = interoplateAccent(stat.count / maxCount)
     })
 
-    var test = parent
+    const squares = parent.append('g')
+    const text = parent.append('g')
+
+    squares
         .selectAll('rect')
         .data(stats)
         .enter()
@@ -32,17 +35,27 @@ export default function (stats, element, width, height) {
         .attr('height', visibleSize)
         .attr('fill', stat => stat.color)
         .style('outline', 0)
-        .attr('y', (stat, i) => i % 7 * size + (margin / 2))
+        .attr('y', (stat, i) => i % 7 * size + (margin / 2) + 20)
         .attr('x', (stat, i) => Math.floor(i / 7) * size + (margin / 2))
         .attr('title', stat => {
             const s = stat.count === 1 ? '' : 's'
             return `${moment(stat.date).format('ll')}<br><strong>${stat.count} task${s} completed</strong>`
         })
-        .each(function () {
+        .each(function (stat) {
             tippy.one(this, {
                 arrow: true,
                 duration: 0,
                 delay: 0,
             })
+            if (moment(stat.date).date() === Math.floor(moment(stat.date).daysInMonth() / 2)) {
+                text
+                    .append('text')
+                    .style('text-anchor', 'middle')
+                    .style('font-size', '13px')
+                    .text(moment(stat.date).format('MMM'))
+                    .attr('fill', 'rgba(0,0,0,0.33)')
+                    .attr('x', d3.select(this).attr('x'))
+                    .attr('y', 10)
+            }
         })
 }
