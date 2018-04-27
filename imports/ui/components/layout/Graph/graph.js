@@ -35,7 +35,8 @@ export default function (stats, element, width, height) {
         .attr('y', (stat, i) => i % 7 * size + (margin / 2))
         .attr('x', (stat, i) => Math.floor(i / 7) * size + (margin / 2))
         .attr('title', stat => {
-            return `${moment(stat.date).format('ll')} - ${stat.count} tasks`
+            const s = stat.count === 1 ? '' : 's'
+            return `${moment(stat.date).format('ll')}<br><strong>${stat.count} task${s} completed</strong>`
         })
         .each(function () {
             tippy.one(this, {
