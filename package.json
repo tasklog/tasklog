@@ -42,6 +42,7 @@
     "react-router-dom": "^4.2.2",
     "simpl-schema": "^1.4.2",
     "svgexport": "^0.3.2",
+    "tippy.js": "^2.5.2",
     "uuid": "^3.2.1",
     "victory": "^0.25.7"
   }
