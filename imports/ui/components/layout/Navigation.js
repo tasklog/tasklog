@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { logout } from '/imports/utils/auth'
 import moment from 'moment'
@@ -27,30 +27,35 @@ class Navigation extends Component {
                             <img src={Meteor.user().services.google.picture} alt='profile image' />
                         </li>
                         <li>
-                            <Link to={`/y/${moment().year()}`}>
+                            <NavLink className='navlink' to={`/y/${moment().year()}`}>
                                 This Year
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={`/m/${moment().year()}/${moment().month() + 1}`}>
+                            <NavLink className='navlink' to={`/m/${moment().year()}/${moment().month() + 1}`}>
                                 This Month
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={`/w/${moment().year()}/${moment().week()}`}>
+                            <NavLink className='navlink' to={`/w/${moment().year()}/${moment().week()}`}>
                                 This Week
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={`/d/${moment().year()}/${moment().month() + 1}/${moment().date()}`}>
+                            <NavLink className='navlink' to={`/d/${moment().year()}/${moment().month() + 1}/${moment().date()}`}>
                                 Today
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
 
                     <ul>
                         <li>
-                            <a href='#' onClick={logout}>Logout</a>
+                            <NavLink className='navlink' to={`/productivity`}>
+                                Your Productivity
+                            </NavLink>
+                        </li>
+                        <li>
+                            <a href='#' className='navlink' onClick={logout}>Logout</a>
                         </li>
                     </ul>
                 </nav>

@@ -31,7 +31,7 @@ class App extends Component {
                                     <Route exact path='/w/:year/:week' component={WeeklyLog} />
                                     <Route exact path='/m/:year/:month' component={MonthlyLog} />
                                     <Route exact path='/y/:year' component={YearlyLog} />
-                                    <Route exact path='/graph' component={Graph} />
+                                    <Route exact path='/productivity' component={Graph} />
                                     <Route component={NoMatch} />
                                 </Switch>
                             </Page>

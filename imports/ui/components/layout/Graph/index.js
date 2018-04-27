@@ -24,7 +24,12 @@ class Graph extends Component {
 
     render() {
         return (
-            <svg style={{ width: '100%', height: '20rem' }} ref={this.element} />
+            <div className='your-productivity'>
+                <h2>Your Productivity</h2>
+                <figure aria-label='A log visualizing the number of tasks completed per day'>
+                    <svg aria-hidden style={{ width: '100%', height: '20rem' }} ref={this.element} />
+                </figure>
+            </div>
         )
     }
 }
