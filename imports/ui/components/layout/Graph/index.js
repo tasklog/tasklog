@@ -47,6 +47,7 @@ export default withTracker(() => {
     date.subtract(numberDays, 'days')
 
     for (let i = 0; i < numberDays; i++) {
+        date.add(1, 'day')
         const count = Tasks.find({
             completed: {
                 $gte: date.clone().hour(0).minute(0).second(0).toDate(),
@@ -54,7 +55,6 @@ export default withTracker(() => {
             }
         }).count()
         data.push({ date: date.format('YYYY-MM-DD'), count })
-        date.add(1, 'day')
     }
 
     return { data }
