@@ -95,26 +95,25 @@ class TaskRescheduler extends Component {
             }
             if (this.props.onSave) {
                 this.props.onSave(timestamp)
-                this.reset()
             }
         }
     }
-    handleCancel = () => {
-        this.props.onCancel()
-        this.reset()
+    reset = () => {
+        if (!this.props.open) {
+            this.setState({
+                period: undefined,
+                year: undefined,
+                month: undefined,
+                week: undefined,
+                day: undefined
+            })
+        }
     }
-    reset = () => this.setState({
-        period: undefined,
-        year: undefined,
-        month: undefined,
-        week: undefined,
-        day: undefined
-    })
     render() {
         return (
             <>
             {this.props.children}
-            <Rodal visible={this.props.open} onClose={() => {}} showCloseButton={false}>
+            <Rodal visible={this.props.open} onClose={() => {}} showCloseButton={false} onAnimationEnd={this.reset}>
                 <form onSubmit={e => e.preventDefault()}>
                     <h3>Reschedule a Task</h3>
                     <Select
@@ -153,7 +152,7 @@ class TaskRescheduler extends Component {
                         onChange={this.update('day')}
                      />
                      <div className='buttons'>
-                         <button className='secondary' onClick={this.handleCancel}>Cancel</button>
+                         <button className='secondary' onClick={this.props.onCancel}>Cancel</button>
                          <button onClick={this.handleSave} disabled={this.isSaveDisabled}>Reschedule</button>
                      </div>
                 </form>
