@@ -286,8 +286,12 @@ body {
 
 .rodal-dialog {
     top: -20% !important;
-    height: 25rem !important;
+    height: 26rem !important;
     max-width: 95%;
+}
+
+.Select.is-focused:not(.is-open) > .Select-control {
+    border-color: @primary !important;
 }
 
 .rodal-dialog > form {
@@ -313,6 +317,33 @@ body {
     .buttons {
         display: flex;
         justify-content: flex-end;
+
+        button {
+            background: @primary;
+            border: 0;
+            font-family: inherit;
+            padding: 0.5rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        button:not(:last-child) {
+            margin-right: 0.75rem;
+        }
+
+        button[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        button.secondary {
+            color: @primary;
+            background: none;
+            border: 2px solid @primary;
+        }
     }
 }
 

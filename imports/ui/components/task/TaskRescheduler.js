@@ -1,25 +1,26 @@
-import { Meteor } from 'meteor/meteor'
-import Dropdown from 'rc-dropdown'
-import Menu, { Item, Divider } from 'rc-menu'
-import React, { Component } from 'react'
-import Rodal from 'rodal'
-import { RadioGroup, RadioButton } from 'react-radio-buttons'
-import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import moment from 'moment'
+import { Meteor } from 'meteor/meteor'
 import { weeksOf } from '/imports/utils/time'
-
-const CustomRadioButton = (props) => (
-    <RadioButton iconSize={20} pointColor='#2699FB' {...props} />
-)
+import Dropdown from 'rc-dropdown'
+import moment from 'moment'
+import React, { Component, createRef } from 'react'
+import Rodal from 'rodal'
+import Select from 'react-select'
 
 class TaskRescheduler extends Component {
+    periodInput = createRef()
     state = {
         period: undefined,
         year: undefined,
         month: undefined,
         week: undefined,
         day: undefined
+    }
+    componentDidUpdate(props) {
+        // focus first input on open
+        if (this.props.open && this.props.open !== props.open) {
+            this.periodInput.current.focus()
+        }
     }
     get requiredFields() {
         switch (this.state.period) {
@@ -60,10 +61,15 @@ class TaskRescheduler extends Component {
     }
     get days() {
         if (this.state.week != null) {
-            return moment.weekdays().map((weekday, i) => {
-                const m = moment().year(this.state.year).month(this.state.month).week(this.state.week).weekday(i)
-                return { value: m.date(), label: m.format('dddd, MMM D') }
-            })
+            return moment.weekdays()
+                .map((weekday, i) => {
+                    const m = moment().year(this.state.year).month(this.state.month).week(this.state.week).weekday(i)
+                    if (m.month() === this.state.month) {
+                        return { value: m.date(), label: m.format('dddd, MMM D') }
+                    }
+                    return null
+                })
+                .filter(day => day !== null)
         }
         return []
     }
@@ -113,6 +119,7 @@ class TaskRescheduler extends Component {
                 <form onSubmit={e => e.preventDefault()}>
                     <h3>Reschedule a Task</h3>
                     <Select
+                        ref={this.periodInput}
                         value={this.state.period}
                         placeholder='Reschedule to a ...'
                         options={this.periods}
@@ -148,7 +155,7 @@ class TaskRescheduler extends Component {
                      />
                      <div className='buttons'>
                          <button className='secondary' onClick={this.handleCancel}>Cancel</button>
-                         <button onClick={this.handleSave} disabled={this.isSaveDisabled}>Save</button>
+                         <button onClick={this.handleSave} disabled={this.isSaveDisabled}>Reschedule</button>
                      </div>
                 </form>
             </Rodal>
