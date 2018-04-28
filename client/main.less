@@ -47,14 +47,8 @@ button.reset {
     background: #757575 !important;
 }
 
-.rc-dropdown-menu-item-active,
-.rc-dropdown-menu-item-selected {
-    cursor: pointer;
-    background-color: inherit !important;
-}
-
-.rc-dropdown-menu-item-selected:after {
-    display: none !important;
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    background-color: @primary !important;
 }
 
 // fonts
