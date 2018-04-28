@@ -276,6 +276,46 @@ body {
 
 // other styles
 
+.Select {
+    margin-bottom: 1.5rem;
+}
+
+.is-disabled .Select-control {
+    cursor: not-allowed !important;
+}
+
+.rodal-dialog {
+    top: -20% !important;
+    height: 25rem !important;
+    max-width: 95%;
+}
+
+.rodal-dialog > form {
+    padding: 0.25rem 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    h3 {
+        margin-bottom: 1rem;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+
+        &:not(:first-child) {
+            margin-top: 1.5rem;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
 .navlink {
     display: inline-flex;
     flex-direction: column;

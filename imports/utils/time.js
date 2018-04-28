@@ -63,3 +63,23 @@ export const buildScheduledQuery = (timestamp = {}) => {
 
     return query
 }
+
+export const weeksOf = (month, year) => {
+    const baseMoment = moment().year(year).month(month)
+    const firstMoment = baseMoment.clone().date(0)
+    const lastMoment = baseMoment.clone().date(baseMoment.daysInMonth())
+
+    const weeks = []
+    let week = firstMoment.week()
+
+    while (week <= lastMoment.week()) {
+        weeks.push({
+            weekNumber: week,
+            startDate: moment().day('Sunday').year(year).week(week),
+            endDate: moment().day('Saturday').year(year).week(week)
+        })
+        week++
+    }
+
+    return weeks
+}

@@ -1,4 +1,3 @@
-import 'react-day-picker/lib/style.css'
 import { decode } from 'base-64'
 import { formatDate, parseDate } from 'react-day-picker/moment'
 import { Meteor } from 'meteor/meteor'
@@ -23,7 +22,8 @@ class Task extends Component {
     liRef = null
 
     state = {
-        pickerOpen: false
+        pickerOpen: false,
+        reschedulerOpen: false
     }
 
     get isComplete() {
@@ -81,6 +81,19 @@ class Task extends Component {
         })
     }
 
+    handleRescheduleOpen = () => {
+        this.setState({ reschedulerOpen: true })
+    }
+
+    handleRescheduleSave = (timestamp) => {
+        console.log(timestamp)
+        this.setState({ reschedulerOpen: false })
+    }
+
+    handleRescheduleCancel = () => {
+        this.setState({ reschedulerOpen: false })
+    }
+
     render() {
         const { task } = this.props
         return (
@@ -125,10 +138,15 @@ class Task extends Component {
                                 />
                             )}
 
-                            <TaskRescheduler task={task}>
+                            <TaskRescheduler
+                                open={this.state.reschedulerOpen}
+                                onSave={this.handleRescheduleSave}
+                                onCancel={this.handleRescheduleCancel}
+                            >
                                 <IconButton
                                     icon={RescheduleIcon}
                                     label='reschedule'
+                                    onClick={this.handleRescheduleOpen}
                                 />
                             </TaskRescheduler>
 
