@@ -86,8 +86,11 @@ class Task extends Component {
     }
 
     handleRescheduleSave = (timestamp) => {
-        console.log(timestamp)
-        this.setState({ reschedulerOpen: false })
+        this.setState({ reschedulerOpen: false }, () => {
+            setTimeout(() => {
+                Meteor.call('task.reschedule', this.props.task._id, timestamp)
+            }, 250)
+        })
     }
 
     handleRescheduleCancel = () => {

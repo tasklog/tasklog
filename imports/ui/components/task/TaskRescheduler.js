@@ -1,4 +1,3 @@
-import 'react-select/dist/react-select.css';
 import { Meteor } from 'meteor/meteor'
 import { weeksOf } from '/imports/utils/time'
 import Dropdown from 'rc-dropdown'
