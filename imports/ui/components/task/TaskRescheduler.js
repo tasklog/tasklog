@@ -133,7 +133,7 @@ class TaskRescheduler extends Component {
                      />
                     <Select
                         value={this.state.month}
-                        placeholder='in the month of ...'
+                        placeholder='and the month of ...'
                         disabled={!this.state.period}
                         options={this.months}
                         onChange={this.update('month', ['week', 'day'])}
