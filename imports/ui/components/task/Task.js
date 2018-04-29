@@ -6,34 +6,12 @@ import CheckIcon from 'react-icons/lib/io/checkmark'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import DeleteIcon from 'react-icons/lib/io/android-cancel'
 import DueDateIcon from 'react-icons/lib/io/android-calendar'
+import IconButton from './IconButton'
 import React, { Component, createRef } from 'react'
 import RescheduleIcon from 'react-icons/lib/io/android-exit'
 import Sortable from '/imports/ui/components/task/Sortable'
 import TaskRescheduler from './TaskRescheduler'
 import Title from '/imports/ui/components/page/Title'
-import tippy from 'tippy.js'
-
-class IconButton extends Component {
-    button = createRef()
-    componentDidMount() {
-        if (!this.props.noTooltip) {
-            tippy.one(this.button.current)
-        }
-    }
-    render() {
-        return (
-            <button
-                ref={this.button}
-                className={`icon-button ${this.props.className}`}
-                onClick={this.props.onClick}
-                title={this.props.label}
-                aria-label={this.props.label}
-            >
-                <this.props.icon />
-            </button>
-        )
-    }
-}
 
 class Task extends Component {
     liRef = null
