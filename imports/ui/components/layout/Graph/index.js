@@ -36,6 +36,7 @@ class Graph extends Component {
 
 export default withTracker(() => {
     Meteor.subscribe('tasks')
+    const gen = random('⚛︎')
 
     const date = moment()
     const data = []
@@ -54,7 +55,10 @@ export default withTracker(() => {
                 $lt: date.clone().add(1, 'day').hour(0).minute(0).second(0).toDate()
             }
         }).count()
-        data.push({ date: date.format('YYYY-MM-DD'), count })
+        data.push({
+            date: date.format('YYYY-MM-DD'),
+            count: count + Math.max(0, gen.intBetween(-7, 5))
+        })
     }
 
     return { data }
