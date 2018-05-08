@@ -120,6 +120,16 @@ class Task extends Component {
                                 <span className='date-picker hide-on-mobile'>
                                     Due on &nbsp;
                                     <DayPickerInput
+                                        inputProps={{
+                                            onBlur: () => {
+                                                // TODO: fix all of this
+                                                setTimeout(() => {
+                                                    if (!this.liRef.querySelector('.DayPickerInput-OverlayWrapper')) {
+                                                        this.setState({ pickerOpen: false })
+                                                    }
+                                                }, 100)
+                                            }
+                                        }}
                                         formatDate={formatDate}
                                         parseDate={parseDate}
                                         format='LL'
