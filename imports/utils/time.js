@@ -50,7 +50,6 @@ export const buildScheduledQuery = (timestamp = {}) => {
         case 'week':
             query['scheduled.day'] = null
             query['scheduled.week'] = week
-            query['scheduled.month'] = null
             query['scheduled.year'] = year
             break
         case 'month':
